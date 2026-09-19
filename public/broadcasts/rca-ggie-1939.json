@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "radioId": "rca-ggie-1939",
+  "period": {
+    "startYear": 1939,
+    "endYear": 1940
+  },
+  "description": "Broadcasts and public addresses from the first two years of this radio’s use.",
+  "selection": {
+    "monthDistanceWeights": [
+      6,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "recordings": [
+    {
+      "id": "fdr-1940-01-30",
+      "title": "Seventh Birthday Ball address",
+      "date": "1940-01-30",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr160.mp3/dc145c22-38ed-4b69-9ab0-6877f967e81b",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr159",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1939-02-18",
+      "title": "Opening of the Golden Gate International Exposition",
+      "date": "1939-02-18",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr138.mp3/963c49bf-fca2-4a20-95bc-a849b4f0dbad",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr137",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1940-03-08",
+      "title": "Farm anniversary dinners",
+      "date": "1940-03-08",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr163.mp3/615a2a61-309a-46e2-8e38-c4d5c4cdb9b7",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr162",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1940-04-15",
+      "title": "Address to the Pan American Union",
+      "date": "1940-04-15",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr165.mp3/cdb881cc-67a4-4c4a-9dcd-c6992f4800ae",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr164",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1939-05-09",
+      "title": "Freedom of the press: introducing the Cabinet Series",
+      "date": "1939-05-09",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr145.mp3/2904fd4c-4064-4430-a6f8-5ac9319d0f7c",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr144",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1940-06-10",
+      "title": "University of Virginia commencement address",
+      "date": "1940-06-10",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr170.mp3/7d78933a-17ef-4afe-bb0a-227027aa0624",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr169",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1940-07-19",
+      "title": "Acceptance of the Democratic presidential nomination",
+      "date": "1940-07-19",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr171.mp3/c0f1cc1b-044c-459c-a5f2-374686dea52d",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr170",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1940-08-19",
+      "title": "Dedication of radio station WKIP",
+      "date": "1940-08-19",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr172.mp3/15e032d5-615c-4bb3-82a2-f24deca98275",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr171",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1939-09-03",
+      "title": "Fireside Chat on War in Europe",
+      "date": "1939-09-03",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr149.mp3/087b6d22-f1c3-4c43-8652-914c4c43a529",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr148",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1939-10-09",
+      "title": "Mobilization for Human Needs",
+      "date": "1939-10-09",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr151.mp3/3478ecf4-ee9f-46c3-8b18-0325cba2864d",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr150",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1939-11-11",
+      "title": "American Red Cross annual appeal",
+      "date": "1939-11-11",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr153.mp3/e350cf0e-8268-4dd2-855d-7447b2334de2",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr152",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1939-12-24",
+      "title": "Christmas greeting to the nation",
+      "date": "1939-12-24",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr156.mp3/3b162f31-b182-4334-b28c-0dfba5351d46",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr155",
+      "baseWeight": 1
+    }
+  ]
+}
