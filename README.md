@@ -82,9 +82,23 @@ The catalog is validated before playback, and unknown or invalid files show a re
 
 All paths are relative and navigation uses URL hashes, so the build works at either
 an origin root or a GitHub Pages repository subdirectory without rewrite rules.
-The included `.github/workflows/pages.yml` builds and deploys on pushes to `main`.
-In the repository's Pages settings, choose **GitHub Actions** as the deployment source.
-No deployment has been made by creating this project.
+The workflow in `.github/workflows/pages.yml`:
+
+- Runs tests and builds on pull requests targeting `main`.
+- Runs tests, builds, and publishes `dist/` on pushes to `main`.
+- Supports a manual run from the Actions tab; select `main` to deploy.
+- Deploys only after a successful build, using the `github-pages` environment.
+
+To enable publishing:
+
+1. Push this repository to GitHub with `main` as the publishing branch.
+2. In **Settings → Pages → Build and deployment → Source**, select **GitHub Actions**.
+3. Push to `main`, or run **Test and deploy to GitHub Pages** from the Actions tab.
+4. The deployment job reports the published site URL.
+
+No custom secret, npm installation, or `gh-pages` branch is required. Pull requests
+cannot publish the site. No GitHub remote is currently configured in this local
+checkout, so the workflow has not been run on GitHub yet.
 
 The model runtime and generators are bundled locally. Google Fonts enhances the
 font styling, with system font fallbacks when offline. Historical audio needs an
