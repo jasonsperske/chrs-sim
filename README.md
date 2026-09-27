@@ -59,8 +59,12 @@ Object Studio, and IndexedDB. No server, account, or package installation is nee
 - Listening corner with power, volume, and Another recording controls. Each radio
   loads its own JSON catalog from `public/broadcasts/<catalog-id>.json`:
   - RCA: twelve FDR Library recordings, 1939–1940, including the opening of the
-    Golden Gate International Exposition.
-  - Silvertone: twelve 1938 broadcasts, including The War of the Worlds.
+    Golden Gate International Exposition, and 46 episodes of The Shadow.
+  - Silvertone: twelve 1938 broadcasts, including The War of the Worlds, and 59
+    episodes of The Shadow from 1938–1939.
+  - The Shadow episodes come from one Internet Archive item. Only episodes dated on a
+    Sunday, the show's broadcast night, are included. Each episode is weighted so the
+    series as a whole is drawn about as often as the catalog's other recordings.
   - Fritchle: nine from 1931–1932, mostly the 1932 campaign.
   - Field radio: twelve wartime bulletins, Armed Forces Radio Service relays and
     addresses a station could have received, 1942–1945.
@@ -136,8 +140,9 @@ internet connection; preferences and models do not need a backend.
   — dated recordings from 1932–1945.
 - [Vincent Voice Library, Michigan State University](https://d.lib.msu.edu/vvl)
   — wartime and 1932 campaign recordings.
-- [Internet Archive](https://archive.org/) — news broadcasts, The War of the Worlds
-  and other period recordings. Each recording links to its source item.
+- [Internet Archive](https://archive.org/) — news broadcasts, The War of the Worlds,
+  [The Shadow, 1937–1954](https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes)
+  (Public Domain Mark) and other period recordings. Each recording links to its source item.
 - Audio remains hosted by each archive.
 
 Optional WebMCP tools expose collection read-back and room navigation in supporting
