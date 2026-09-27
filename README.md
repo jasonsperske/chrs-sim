@@ -6,8 +6,10 @@ Object Studio, and IndexedDB. No server, account, or package installation is nee
 
 ## Run
 
-- `npm run dev` serves the source on port 5173 (requires Python 3).
-- If occupied: `python3 -m http.server 5187`.
+- `npm run dev` serves the source on port 5173 (`PORT=5187 npm run dev` if it is
+  taken). Like the static host, it answers paths without a file with
+  `index.html`, so deep links such as `/radio/<catalog-id>` load.
+- `npm run preview` builds and serves `dist/`.
 - `npm test` checks bookmarks and their migration, shelf packing and model fit, framing, and recording catalogs.
 - `npm run build` writes the standalone website to `dist/`.
 
@@ -37,8 +39,8 @@ Object Studio, and IndexedDB. No server, account, or package installation is nee
   wins. Legacy single shelf placements migrate to independent memberships;
   historical placements do not invent personal memberships.
 - Each radio has its own page, in the spirit of Object Studio's page per object:
-  `#radio/<catalog-id>` is its About mode (history, model notes, resources and
-  bookmarks) and `#radio/<catalog-id>/listen` its listening corner mode. The
+  `/radio/<catalog-id>` is its About mode (history, model notes, resources and
+  bookmarks) and `/radio/<catalog-id>/listen` its listening corner mode. The
   page's favorite toggle works in both modes. The top bar's Listening corner opens
   the listening mode of the radio viewed last. The workbench is disabled for now.
 - Four radios from Object Studio: the 1939 RCA Victor GGIE, the 1938 Silvertone
@@ -76,7 +78,7 @@ Object Studio, and IndexedDB. No server, account, or package installation is nee
 
 ## Radio pages and adding radios
 
-Open any radio from the shelves, or go straight to `#radio/<catalog-id>`. Use the
+Open any radio from the shelves, or go straight to `/radio/<catalog-id>`. Use the
 page's **About** and **Listening corner** modes to switch between its history and
 its period recordings; each mode has its own URL, so both can be linked to.
 `window.radioRoom.openRadio(catalogId, 'about' | 'listen')` opens a page and
@@ -93,8 +95,15 @@ The catalog is validated before playback, and unknown or invalid files show a re
 
 ## Static deployment
 
-All paths are relative and navigation uses URL hashes, so the build works at either
-an origin root or a GitHub Pages repository subdirectory without rewrite rules.
+Pages have real paths: `/`, `/collection`, `/radio/<catalog-id>` and
+`/radio/<catalog-id>/listen`. The build copies `index.html` to `404.html`, which
+GitHub Pages serves for any path without a file, so a deep link loads the app and
+the app reads the path. An inline script in `index.html` sets `<base>` to the
+site's directory, found by removing the app's route from the path, so asset URLs
+stay relative. The build therefore works at either an origin root or a GitHub
+Pages repository subdirectory without rewrite rules. A deep link's first
+response has status 404, as with any Pages 404 fallback. Hash links from
+earlier versions, such as `#radio/<catalog-id>`, redirect to their path.
 The workflow in `.github/workflows/pages.yml`:
 
 - Runs tests and builds on pull requests targeting `main`.

@@ -1,11 +1,15 @@
 import {mountListening} from './listening.js';
 import {RoomScene,radioParams} from './scene.js';
 import {layoutCollection,TILE_W,TILE_H} from './shelf-layout.js';
+import {parseRoute,routePath} from './routes.js';
 import {read,write,remove} from './db.js';
 import {collections,historicalAttributes,organizationOptions,catalog,mergeBookmarks,updateMembership,validatePersonal,personalCaption,buildShelfGroups} from './catalog.js';
 const icons={radio:'<rect x="3" y="7" width="18" height="14" rx="3"/><path d="M7 11v6m3-6v6m3-6v6m3-5h2M7 7l11-4"/><circle cx="17" cy="17" r="1"/>',shelf:'<path d="M4 4v16m16-16v16M4 9h16M4 18h16M7 5v4m4-4v4m5-4v4M7 13v5m5-5v5m5-5v5"/>',tool:'<path d="M14 5a5 5 0 0 0-6 6L3 16a3 3 0 0 0 5 5l5-5a5 5 0 0 0 6-6l-4 4-4-4 4-4Z"/>',listen:'<path d="M4 14v-3a8 8 0 0 1 16 0v3M4 13H2v7h5v-7Zm16 0h2v7h-5v-7Z"/>',arrow:'<path d="M4 12h16m-6-6 6 6-6 6"/>',star:'<path d="m12 3 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1Z"/>',plus:'<path d="M12 5v14M5 12h14"/>',minus:'<path d="M5 12h14"/>',home:'<path d="m3 10 9-7 9 7M5 9v12h14V9m-10 12v-7h6v7"/>',close:'<path d="m6 6 12 12M6 18 18 6"/>',move:'<path d="M12 3v18M3 12h18m-6-6-3-3-3 3m6 12-3 3-3-3M6 9l-3 3 3 3m12-6 3 3-3 3"/>',info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v6m0-10v1"/>'};
 const icon=(name)=>`<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${icons[name]||icons.radio}</svg>`;
 const app=document.querySelector('#app');
+// The site's base directory: this module lives in <base>/src/.
+const BASE=new URL('../',import.meta.url).pathname;
+const routeURL=route=>BASE+routePath(route)+location.search;
 let state={view:'welcome',started:false,radios:[],activeSection:'all',organization:'all',pan:{x:0,y:0},zoom:1,radioId:'rca-ggie-1939',radioMode:'about',volume:.45};
 let scene, saveTimer, listeningCleanup, storageOK=true;
 const escapeHTML=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -47,11 +51,11 @@ function positionLabels(){if(state.view!=='collection'||!scene)return;document.q
 function bindGestures(el){let drag=null;el.addEventListener('pointerdown',e=>{if(e.button!==0)return;drag={x:e.clientX,y:e.clientY};el.setPointerCapture(e.pointerId);el.classList.add('dragging')});el.addEventListener('pointermove',e=>{if(!drag)return;const dx=e.clientX-drag.x,dy=e.clientY-drag.y;drag={x:e.clientX,y:e.clientY};if(state.view==='collection'){const scale=2.5/scene.zoom;state.pan.x-=dx*scale;state.pan.y+=dy*scale;scene.setPan(state.pan.x,state.pan.y);scheduleSave()}else scene?.rotate(dx*.009)});const end=()=>{drag=null;el.classList.remove('dragging')};el.addEventListener('pointerup',end);el.addEventListener('pointercancel',end);el.addEventListener('wheel',e=>{if(state.view!=='collection')return;e.preventDefault();if(e.ctrlKey){zoom(-e.deltaY*.004);return}const factor=e.deltaMode===1?16:e.deltaMode===2?el.clientHeight:1;state.pan.x+=(e.shiftKey?e.deltaY:e.deltaX)*factor*1.5/scene.zoom;state.pan.y-=(e.shiftKey?0:e.deltaY)*factor*1.5/scene.zoom;scene.setPan(state.pan.x,state.pan.y);scheduleSave()},{passive:false});el.addEventListener('keydown',e=>{const moves={ArrowLeft:[-180,0],ArrowRight:[180,0],ArrowUp:[0,180],ArrowDown:[0,-180]};if(moves[e.key]){e.preventDefault();state.pan.x+=moves[e.key][0];state.pan.y+=moves[e.key][1];scene.setPan(state.pan.x,state.pan.y);scheduleSave()}if(e.key==='Home'){e.preventDefault();jump(collectionGroups()[0]?.id)}if(e.key==='+')zoom(.1);if(e.key==='-')zoom(-.1)})}
 function zoom(delta){if(!scene)return;state.zoom=Math.max(.55,Math.min(1.8,scene.zoom+delta));scene.setPan(state.pan.x,state.pan.y,state.zoom);scheduleSave()}
 function jump(id){const s=collectionGroups().find(s=>s.id===id)||collectionGroups()[0];if(!s)return;state.activeSection=s.id;state.pan={x:s.x*TILE_W,y:s.y*TILE_H};scene?.setPan(state.pan.x,state.pan.y);document.querySelectorAll('[data-section]').forEach(b=>b.classList.toggle('selected',b.dataset.section===s.id));scheduleSave()}
-async function navigate(view,updateRoute=true){if(view==='listening'){openRadio(state.radioId,'listen',updateRoute);return}if(view==='workbench'){view='collection';history.replaceState(null,'','#collection');updateRoute=false;}if(updateRoute)history.pushState(null,'',view==='welcome'?location.pathname+location.search:'#'+view);state.view=view;if(view==='collection'){state.started=true;await persist()}renderView();if(view==='collection')document.querySelector('#scene').focus({preventScroll:true})}
+async function navigate(view,updateRoute=true){if(view==='listening'){openRadio(state.radioId,'listen',updateRoute);return}if(view==='workbench'){view='collection';history.replaceState(null,'',routeURL({view}));updateRoute=false;}if(updateRoute)history.pushState(null,'',routeURL({view}));state.view=view;if(view==='collection'){state.started=true;await persist()}renderView();if(view==='collection')document.querySelector('#scene').focus({preventScroll:true})}
 async function handleClick(e){const view=e.target.closest('[data-view]');if(view){await navigate(view.dataset.view);return}const section=e.target.closest('[data-section]');if(section){jump(section.dataset.section);return}const radio=e.target.closest('[data-radio]');if(radio){openRadio(radio.dataset.radio);return}const button=e.target.closest('[data-action]');if(!button)return;switch(button.dataset.action){case'welcome':navigate('welcome');break;case'start':navigate('collection');break;case'reset':jump(collectionGroups()[0]?.id);break;case'zoom-in':zoom(.1);break;case'zoom-out':zoom(-.1);break;case'preview':openRadio(button.dataset.catalog);break;case'mode':openRadio(state.radioId,button.dataset.mode);break;case'favorite':await setMembership('favorites',button.getAttribute('aria-pressed')!=='true');break;case'close':document.querySelector('#dialog').close();break;}}
 // Each catalog radio has its own page, with an About mode and a listening
 // corner mode. Its route is #radio/<catalog id>, plus /listen for listening.
-function openRadio(catalogId,mode='about',updateRoute=true){if(!catalog[catalogId])catalogId='rca-ggie-1939';state.radioId=catalogId;state.radioMode=mode==='listen'?'listen':'about';if(updateRoute)history.pushState(null,'',`#radio/${catalogId}${state.radioMode==='listen'?'/listen':''}`);state.view='radio';renderView();scheduleSave()}
+function openRadio(catalogId,mode='about',updateRoute=true){if(!catalog[catalogId])catalogId='rca-ggie-1939';state.radioId=catalogId;state.radioMode=mode==='listen'?'listen':'about';if(updateRoute)history.pushState(null,'',routeURL({view:'radio',radioId:catalogId,mode:state.radioMode}));state.view='radio';renderView();scheduleSave()}
 function updateShelfExplanation(groups){
   const collection=collections.find(c=>c.id===state.organization);
   document.querySelector('#view-explanation').textContent=historicalAttributes.includes(state.organization)?`Historical attributes · shelf labels show each ${state.organization}.`:state.organization==='all'?'Every radio in the collection · by release year.':state.organization==='collections'?'Independent collections · a radio can appear on more than one shelf.':`${collection.name} · most recently marked ${collection.name.toLowerCase()} first.`;
@@ -106,7 +110,15 @@ function renderRadio(main){
     onPower:on=>{scene?.setRadioControls(radioParams(data.id,{on,volume:state.volume})).catch(()=>toast('The radio model could not update.'))}
   });
 }
-function restoreRoute(){const hash=decodeURIComponent(location.hash.slice(1)),radio=/^radio\/([^/]+)(\/listen)?$/.exec(hash);if(radio){if(catalog[radio[1]])openRadio(radio[1],radio[2]?'listen':'about',false);else navigate('collection',false)}else if(['collection','workbench','listening'].includes(hash))navigate(hash,false);else navigate('welcome',false)}
+function restoreRoute(){
+  const path=location.pathname.startsWith(BASE)?location.pathname.slice(BASE.length):'',route=parseRoute(path,location.hash);
+  // Hash links from earlier versions move to their path.
+  if(location.hash&&route.view!=='welcome')history.replaceState(null,'',routeURL(route.view==='radio'?route:{view:route.view==='unknown'?'collection':route.view}));
+  if(route.view==='radio'){if(catalog[route.radioId])openRadio(route.radioId,route.mode,false);else{history.replaceState(null,'',routeURL({view:'collection'}));navigate('collection',false)}}
+  else if(route.view==='listening'){history.replaceState(null,'',routeURL({view:'radio',radioId:state.radioId,mode:'listen'}));navigate('listening',false)}
+  else if(['collection','workbench'].includes(route.view))navigate(route.view,false);
+  else{if(route.view==='unknown')history.replaceState(null,'',routeURL({view:'welcome'}));navigate('welcome',false)}
+}
 window.radioRoom={getCollection:()=>structuredClone(state.radios),openRadio:(catalogId,mode)=>openRadio(catalogId,mode)};
 state.radios=mergeBookmarks([]).radios;
 try{const [preferences,stored]=await Promise.all([read('preferences','room'),read('radios')]);if(preferences){state={...state,...preferences,view:'welcome'};}
@@ -115,7 +127,7 @@ if(!catalog[state.radioId])state.radioId='rca-ggie-1939';
 if(!organizationOptions.includes(state.organization))state.organization='all';
 // Acquired copies from earlier versions become bookmarks on the catalog radios.
 if(legacy.length){state.pan={x:0,y:0};state.activeSection=collectionGroups()[0]?.id||'all';await Promise.all(radios.filter(r=>Object.keys(r.memberships).length||r.personal).map(r=>write('radios',r)));await Promise.all(legacy.map(id=>remove('radios',id)));}}catch{storageOK=false}
-layout();if(location.hash)restoreRoute();window.addEventListener('popstate',restoreRoute);
+layout();restoreRoute();window.addEventListener('popstate',restoreRoute);
 window.addEventListener('pagehide',()=>{clearTimeout(saveTimer);persist()});
 
 if(document.modelContext?.registerTool){
