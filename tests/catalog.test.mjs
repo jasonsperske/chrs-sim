@@ -1,34 +1,36 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {webcrypto} from 'node:crypto';
-import {createRadioId,normalizeRadio,buildShelfGroups} from '../src/catalog.js';
-if(!globalThis.crypto)globalThis.crypto=webcrypto;
-test('unknown catalog entries cannot be added',()=>assert.throws(()=>normalizeRadio({catalogId:'unknown'}),/Unknown/));
-test('collection begins empty; new radios have no personal memberships',()=>{
- assert.deepEqual(buildShelfGroups([],'favorites')[0].radios,[]);
- const radio=normalizeRadio({catalogId:'rca-ggie-1939'},100);
- assert.deepEqual(radio.memberships,{});assert.equal(radio.isNew,true);assert.equal(radio.addedAt,100);
+import {catalog,mergeBookmarks,buildShelfGroups,updateMembership} from '../src/catalog.js';
+test('the collection starts with every catalog radio and no bookmarks',()=>{
+ const {radios,legacy}=mergeBookmarks([]);
+ assert.deepEqual(radios.map(r=>r.id).sort(),Object.keys(catalog).sort());
+ for(const radio of radios){assert.equal(radio.id,radio.catalogId);assert.deepEqual(radio.memberships,{});assert.equal(radio.personal,null)}
+ assert.deepEqual(legacy,[]);
+ assert.equal(buildShelfGroups(radios,'all')[0].radios.length,Object.keys(catalog).length);
+ assert.deepEqual(buildShelfGroups(radios,'favorites')[0].radios,[]);
 });
-test('acquisition identifiers reject markup and malformed values',()=>{
- assert.throws(()=>normalizeRadio({id:'<script>',catalogId:'rca-ggie-1939'}),/identifier/);
- assert.throws(()=>normalizeRadio({id:42,catalogId:'rca-ggie-1939'}),/identifier/);
+test('shelves list radios by release year',()=>{
+ const {radios}=mergeBookmarks([]);
+ assert.deepEqual(buildShelfGroups(radios,'all')[0].radios.map(r=>r.id),['fritchle-1931','silvertone-6110-1938','rca-ggie-1939','navy-field-radio-1943']);
 });
-
-test('adding on HTTP works when randomUUID is unavailable',()=>{
- const descriptor=Object.getOwnPropertyDescriptor(globalThis,'crypto');
- const httpCrypto={getRandomValues:bytes=>webcrypto.getRandomValues(bytes)};
- Object.defineProperty(globalThis,'crypto',{configurable:true,value:httpCrypto});
- try{
-  assert.equal(globalThis.crypto.randomUUID,undefined);
-  const radios=Array.from({length:100},()=>normalizeRadio({catalogId:'rca-ggie-1939'}));
-  assert.equal(new Set(radios.map(r=>r.id)).size,100);
-  for(const radio of radios){
-   assert.match(radio.id,/^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/);
-   assert.deepEqual(radio.memberships,{});
-   assert.equal(radio.isNew,true);
-  }
- }finally{if(descriptor)Object.defineProperty(globalThis,'crypto',descriptor);else delete globalThis.crypto}
+test('saved bookmarks are kept for their radio',()=>{
+ const saved=updateMembership(mergeBookmarks([]).radios.find(r=>r.id==='fritchle-1931'),'favorites',true,500);
+ const {radios,legacy}=mergeBookmarks([saved]);
+ assert.deepEqual(radios.find(r=>r.id==='fritchle-1931').memberships,{favorites:500});
+ assert.deepEqual(legacy,[]);
 });
-test('fallback identifiers set UUID version and variant bits',()=>{
- assert.equal(createRadioId({getRandomValues:bytes=>bytes.fill(255)}),'ffffffff-ffff-4fff-bfff-ffffffffffff');
+test('acquired copies from earlier versions fold into one bookmark per radio',()=>{
+ const personal={relationship:'used',startYear:1960,endYear:1965,ongoing:false,note:''};
+ const stored=[
+  {id:'a',catalogId:'rca-ggie-1939',schemaVersion:2,addedAt:100,memberships:{favorites:300,personal:150},personal},
+  {id:'b',catalogId:'rca-ggie-1939',schemaVersion:2,addedAt:200,memberships:{favorites:250,highlighted:400},personal:null},
+  {id:'c',catalogId:'rca-ggie-1939',section:'personal',addedAt:50},
+  {id:'d',catalogId:'retired-model',schemaVersion:2,addedAt:10,memberships:{favorites:1},personal:null},
+ ];
+ const {radios,legacy}=mergeBookmarks(stored);
+ const ggie=radios.find(r=>r.id==='rca-ggie-1939');
+ assert.deepEqual(ggie.memberships,{favorites:300,personal:150,highlighted:400});
+ assert.deepEqual(ggie.personal,personal);
+ assert.deepEqual(legacy.sort(),['a','b','c','d']);
+ assert.equal(radios.length,Object.keys(catalog).length);
 });

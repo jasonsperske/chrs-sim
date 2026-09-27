@@ -8,19 +8,21 @@ Object Studio, and IndexedDB. No server, account, or package installation is nee
 
 - `npm run dev` serves the source on port 5173 (requires Python 3).
 - If occupied: `python3 -m http.server 5187`.
-- `npm test` checks collection validation, empty defaults, and newest-first placement.
+- `npm test` checks bookmarks and their migration, shelf packing and model fit, framing, and recording catalogs.
 - `npm run build` writes the standalone website to `dist/`.
 
 ## Included
 
 - Welcome screen with an interactive Object Studio RCA Victor GGIE radio.
-- Empty, virtually infinite 3D wooden shelves. Drag, use two-axis scrolling,
+- Every radio in the catalog is on the virtually infinite 3D wooden shelves from
+  the first visit; there is nothing to add or acquire. Drag, use two-axis scrolling,
   Shift-scroll horizontally, use arrow keys, and zoom using the controls or Ctrl-scroll.
 - Historical attributes (manufacturer, release year, era, type) belong to the
   catalog model and are read-only. “View shelves by” makes shelf labels match the
   actual attribute values across the user's entire collection.
-- Favorites, Personal, and Highlighted are independent memberships. Radios can be
-  in multiple collections. Each membership has its own added timestamp; its shelf
+- Favorites, Personal, and Highlighted are optional bookmarks for finding radios
+  again out of the larger set. They are independent memberships; a radio can be
+  in any or all of them. Each membership has its own added timestamp; its shelf
   shows the most recently marked radio first. Editing details preserves this order;
   removing and re-adding a membership puts it first again.
 - Personal history stores Owned / Used / Owned and used, optional from/to years,
@@ -28,19 +30,24 @@ Object Studio, and IndexedDB. No server, account, or package installation is nee
   historical release dates remain unchanged. Highlighted radios receive a badge
   and display lighting; favorites receive a star.
 - All radios and All my collections views are available. Region heights expand
-  with their contents to prevent adjacent collections overlapping. Legacy single
-  shelf placements migrate to independent memberships; historical placements do
-  not invent personal memberships. Records remain in IndexedDB.
-- New acquisitions appear first with warm lighting and a NEW badge. Inspecting one
-  acknowledges it, which is saved locally.
-- Dedicated hash-routed history pages and personal collection controls. The workbench is disabled
-  for now; existing cabinet-care data is preserved.
+  with their contents to prevent adjacent collections overlapping. Bookmarks are
+  stored in IndexedDB, one record per catalog radio, keyed by its catalog id.
+  Acquired copies saved by earlier versions merge into their radio's bookmark:
+  each membership keeps its latest time and the most recent personal history
+  wins. Legacy single shelf placements migrate to independent memberships;
+  historical placements do not invent personal memberships.
+- Each radio has its own page, in the spirit of Object Studio's page per object:
+  `#radio/<catalog-id>` is its About mode (history, model notes, resources and
+  bookmarks) and `#radio/<catalog-id>/listen` its listening corner mode. The
+  page's favorite toggle works in both modes. The top bar's Listening corner opens
+  the listening mode of the radio viewed last. The workbench is disabled for now.
 - Four radios from Object Studio: the 1939 RCA Victor GGIE, the 1938 Silvertone
   6110 “Rocket”, Oliver P. Fritchle's c.1931 cabinet radio, and the 1940s Navy field
   transmitter-receiver shown in the Navajo Code Talkers exhibit.
 - Shelves are a bento layout. Each catalog radio declares a `footprint` in shelf
   slots and rows, e.g. the Fritchle is 2×3 and the field radio 2×2. Each shelf
-  region packs its radios densely in newest-first order: small radios fill the
+  region packs its radios densely in order (by release year, or newest bookmark
+  first on a personal collection's shelf): small radios fill the
   gaps beside large ones. The shelf boards inside a large radio's cell are left
   out and dividers close its sides.
 - The listening corner frames each radio at its own size. Tabletop radios stand
@@ -63,33 +70,22 @@ Object Studio, and IndexedDB. No server, account, or package installation is nee
 - Dates, speaker, and archival source are displayed for each recording. Audio starts
   on user input and stops when leaving the room. Catalog and playback failures offer
   retries and source links. Metadata is local; audio streams from the archive.
-- IndexedDB persistence for collected radios, cabinet care, view position, zoom,
-  grouping, selected radio, and volume. Storage failures fall back to the current visit.
+- IndexedDB persistence for bookmarks, personal history, view position, zoom,
+  grouping, the last radio viewed, and volume. Storage failures fall back to the current visit.
 - Responsive layout, keyboard controls, native form controls, and reduced-motion support.
 
-## Study mode and future acquisitions
+## Radio pages and adding radios
 
-New collections start without radios. Use **Add a radio** on the collection screen
-to choose a model, then **Add to your collection** on the radio page to add it and
-select it for the listening corner. `#radio/<catalog-id>` previews any catalog radio. New acquisitions have no personal memberships until you
-choose them on the radio detail page. QR scanning is intentionally absent.
-Open `/?demo=1#collection` to reveal **Add study radio**, which adds the chosen model directly. This mode uses a separate
-IndexedDB database so test acquisitions do not change the visitor's collection.
+Open any radio from the shelves, or go straight to `#radio/<catalog-id>`. Use the
+page's **About** and **Listening corner** modes to switch between its history and
+its period recordings; each mode has its own URL, so both can be linked to.
+`window.radioRoom.openRadio(catalogId, 'about' | 'listen')` opens a page and
+`window.radioRoom.getCollection()` reads every radio with its bookmarks. No input
+is evaluated as executable source: only the locally bundled, trusted Object
+Studio model generators are compiled.
 
-The future acquisition boundary is:
-
-```js
-await window.radioRoom.addRadio({
-  catalogId: 'rca-ggie-1939',
-  section: 'personal',
-});
-```
-
-Only registered entries in `src/catalog.js` are accepted. An optional `id` is reserved
-for the future exhibit acquisition system. No input is evaluated as executable source:
-only the locally bundled, trusted Object Studio model generators are compiled.
-
-The learning library and workbench are future features. To add a radio, vendor its
+The learning library and workbench are future features. To add a radio to the
+collection, vendor its
 Object Studio generator into `public/vendor/`, register it in `src/catalog.js` with
 its footprint and poses, and add its catalog JSON using the existing schema;
 recording dates must fall within its declared period and sources must use HTTPS.

@@ -2,7 +2,7 @@ let database;
 export async function openDatabase() {
   if (database) return database;
   database = new Promise((resolve, reject) => {
-    const request = indexedDB.open(new URLSearchParams(location.search).has('demo')?'chrs-radio-room-study':'chrs-radio-room', 1);
+    const request = indexedDB.open('chrs-radio-room', 1);
     request.onupgradeneeded = () => {
       request.result.createObjectStore('preferences');
       request.result.createObjectStore('radios', {keyPath:'id'});
@@ -26,6 +26,16 @@ export async function write(store, value, key) {
   return new Promise((resolve, reject) => {
     const tx = db.transaction(store, 'readwrite');
     if (key === undefined) tx.objectStore(store).put(value); else tx.objectStore(store).put(value, key);
+    tx.oncomplete = resolve;
+    tx.onerror = () => reject(tx.error);
+    tx.onabort = () => reject(tx.error);
+  });
+}
+export async function remove(store, key) {
+  const db = await openDatabase();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(store, 'readwrite');
+    tx.objectStore(store).delete(key);
     tx.oncomplete = resolve;
     tx.onerror = () => reject(tx.error);
     tx.onabort = () => reject(tx.error);

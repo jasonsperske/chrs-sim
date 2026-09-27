@@ -225,7 +225,7 @@ export class RoomScene {
       const radio=await buildModel(catalog[item.catalogId].model,radioParams(item.catalogId));
       if(this.disposed||generation!==this.generation||this.mode!=='collection'){this.disposeModel(radio);continue}
       placeRadioInCell(radio,cell);radio.userData.id=item.id;
-      if(item.isNew||item.memberships?.highlighted!==undefined){const light=new THREE.PointLight(0xffd79b,180000,650,2);light.position.set(0,300,140);radio.add(light)}
+      if(item.memberships?.highlighted!==undefined){const light=new THREE.PointLight(0xffd79b,180000,650,2);light.position.set(0,300,140);radio.add(light)}
       this.world.add(radio);this.radios.push(radio);
     }this.render();
   }
