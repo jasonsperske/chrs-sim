@@ -2,11 +2,11 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync,existsSync} from 'node:fs';
 import {createStudioRuntime} from '../public/vendor/studio-runtime.js';
-import {catalog,buildShelfGroups,normalizeRadio} from '../src/catalog.js';
+import {catalog,buildShelfGroups,emptyBookmark} from '../src/catalog.js';
 import {packGroup,layoutCollection,TILE_H,SHELF_DEPTH,HALF_BOARD} from '../src/shelf-layout.js';
 import {placeRadioInCell,radioParams} from '../src/scene.js';
 const {THREE,compileObject}=createStudioRuntime();
-const radio=(catalogId,id=catalogId)=>normalizeRadio({id,catalogId},100);
+const radio=(catalogId,id=catalogId)=>({...emptyBookmark(catalogId),id});
 const footprint=r=>catalog[r.catalogId].footprint;
 function model(id,overrides={}) {
  const definition=compileObject(id,readFileSync(new URL(`../public/vendor/${id}.js`,import.meta.url),'utf8'));

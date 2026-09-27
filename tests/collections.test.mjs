@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {normalizeRadio,migrateRadio,updateMembership,validatePersonal,personalCaption,buildShelfGroups,catalog} from '../src/catalog.js';
-const radio=(id,time=100)=>normalizeRadio({id,catalogId:'rca-ggie-1939'},time);
+import {emptyBookmark,migrateRadio,updateMembership,validatePersonal,personalCaption,buildShelfGroups,catalog} from '../src/catalog.js';
+const radio=id=>({...emptyBookmark('rca-ggie-1939'),id});
 test('historical labels come from catalog attributes and cannot become personal memberships',()=>{
  const a=radio('a');const original=JSON.stringify(catalog);
  for(const key of ['manufacturer','year','era','type']){
@@ -13,7 +13,7 @@ test('historical labels come from catalog attributes and cannot become personal 
  assert.equal(JSON.stringify(catalog),original);
 });
 test('personal collections are independent and sorted by their own membership times',()=>{
- let a=radio('a',100),b=radio('b',200);
+ let a=radio('a'),b=radio('b');
  a=updateMembership(a,'favorites',true,500);b=updateMembership(b,'favorites',true,400);
  a=updateMembership(a,'personal',true,300);b=updateMembership(b,'personal',true,600);
  a=updateMembership(a,'highlighted',true,700);

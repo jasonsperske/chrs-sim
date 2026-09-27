@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    // Deep links such as /radio/<id> are served this same page (as 404.html on
+    // static hosts). Resolve the relative URLs below against the site's base
+    // directory by removing the app's route from the path.
+    (()=>{const path=location.pathname.replace(/\/(collection|workbench|listening|radio\/[^/]+(\/listen)?)\/?$/,'/');const base=document.createElement('base');base.href=path.replace(/[^/]*$/,'');document.head.append(base)})();
+  </script>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <meta name="theme-color" content="#191d19" />
   <meta name="description" content="Explore historical radio models, organize a collection and listen to period recordings. Inspired by the California Historical Radio Society." />

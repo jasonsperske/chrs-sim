@@ -41,28 +41,41 @@ export const catalog = {
     resources:[objectStudio,{label:'Navy TBY controls, Introduction to Radio Equipment',url:'https://www.maritime.org/doc/radio/chap22.php'},chrs]
   }
 };
-// getRandomValues works on HTTP LAN previews as well as HTTPS. randomUUID
-// requires a secure context and is unavailable on some older iOS versions.
-export function createRadioId(randomSource=globalThis.crypto) {
-  const bytes=randomSource.getRandomValues(new Uint8Array(16));
-  bytes[6]=(bytes[6]&0x0f)|0x40;
-  bytes[8]=(bytes[8]&0x3f)|0x80;
-  const hex=Array.from(bytes,byte=>byte.toString(16).padStart(2,'0'));
-  return [hex.slice(0,4),hex.slice(4,6),hex.slice(6,8),hex.slice(8,10),hex.slice(10)].map(part=>part.join('')).join('-');
-}
-export function normalizeRadio(input, now=Date.now()) {
-  if(input?.id!==undefined&&(typeof input.id!=='string'||!/^[a-zA-Z0-9_-]{1,100}$/.test(input.id)))throw new Error('Invalid radio identifier.');
-  if (!input || !catalog[input.catalogId]) throw new Error('Unknown radio model.');
-  const memberships={};
-  if(collections.some(c=>c.id===input.section))memberships[input.section]=now;
-  return {id:input.id || createRadioId(), catalogId:input.catalogId, schemaVersion:2, memberships, personal:null, addedAt:now, isNew:true, restored:false};
+// Every catalog radio is on the shelves. What a visitor keeps is a bookmark
+// record per radio: which personal collections it is in (and when it was
+// added to each) and its personal history. The record's id is the catalog id.
+export function emptyBookmark(catalogId) {
+  return {id:catalogId,catalogId,schemaVersion:3,memberships:{},personal:null};
 }
 export function migrateRadio(record) {
-  if(record.schemaVersion===2)return record;
+  if(record.schemaVersion>=2)return record;
   const {section,...rest}=record;
   const memberships={};
   if(collections.some(c=>c.id===section))memberships[section]=record.addedAt;
   return {...rest,schemaVersion:2,memberships,personal:record.personal||null};
+}
+// Earlier versions stored acquired copies of a radio under random ids. Fold
+// them into one bookmark per catalog radio: each membership keeps its latest
+// time, and personal history comes from the most recently acquired copy that
+// has any. Returns every catalog radio, and the stored ids no longer needed.
+export function mergeBookmarks(stored,records=catalog) {
+  const bookmarks=new Map(Object.keys(records).map(id=>[id,emptyBookmark(id)]));
+  const legacy=[];
+  const byAcquisition=[...stored].map(migrateRadio).sort((a,b)=>(a.addedAt??0)-(b.addedAt??0));
+  for(const record of byAcquisition){
+    const bookmark=bookmarks.get(record.catalogId);
+    if(record.id!==record.catalogId)legacy.push(record.id);
+    if(!bookmark)continue;
+    for(const [collection,time] of Object.entries(record.memberships||{}))
+      if(collections.some(c=>c.id===collection)&&!(bookmark.memberships[collection]>=time))bookmark.memberships[collection]=time;
+    if(record.personal)bookmark.personal=record.personal;
+  }
+  return {radios:[...bookmarks.values()],legacy};
+}
+// Shelves list radios by release year ('1940s' counts as 1940), then name.
+export function catalogOrder(a,b,records=catalog) {
+  const year=r=>parseInt(records[r.catalogId]?.year,10)||0,name=r=>String(records[r.catalogId]?.name??r.catalogId);
+  return year(a)-year(b)||name(a).localeCompare(name(b));
 }
 export function updateMembership(radio,collection,enabled,now=Date.now()) {
   if(!collections.some(c=>c.id===collection))throw new Error('Unknown personal collection.');
@@ -95,14 +108,14 @@ export function personalCaption(radio) {
   return `${label} · ${period}`;
 }
 export function buildShelfGroups(radios,organization='all',records=catalog) {
-  const newest=(a,b)=>b.addedAt-a.addedAt||a.id.localeCompare(b.id);
+  const byCatalog=(a,b)=>catalogOrder(a,b,records);
   let groups;
   if(historicalAttributes.includes(organization)){
     const values=[...new Set(radios.map(r=>String(records[r.catalogId][organization])))].sort((a,b)=>a.localeCompare(b,undefined,{numeric:true}));
-    groups=values.map(value=>({id:value,name:value,radios:radios.filter(r=>String(records[r.catalogId][organization])===value).sort(newest)}));
+    groups=values.map(value=>({id:value,name:value,radios:radios.filter(r=>String(records[r.catalogId][organization])===value).sort(byCatalog)}));
   }else if(organization==='collections'||collections.some(c=>c.id===organization)){
-    groups=collections.filter(c=>organization==='collections'||c.id===organization).map(c=>({...c,radios:radios.filter(r=>r.memberships?.[c.id]!==undefined).sort((a,b)=>b.memberships[c.id]-a.memberships[c.id]||newest(a,b))}));
-  }else groups=[{id:'all',name:'All radios',radios:[...radios].sort(newest)}];
+    groups=collections.filter(c=>organization==='collections'||c.id===organization).map(c=>({...c,radios:radios.filter(r=>r.memberships?.[c.id]!==undefined).sort((a,b)=>b.memberships[c.id]-a.memberships[c.id]||byCatalog(a,b))}));
+  }else groups=[{id:'all',name:'All radios',radios:[...radios].sort(byCatalog)}];
   const footprint=radio=>records[radio.catalogId]?.footprint;
   for(const group of groups)Object.assign(group,packGroup(group.radios,footprint));
   let rowY=0;
