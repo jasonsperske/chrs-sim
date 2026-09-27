@@ -1,3 +1,4 @@
+import {packGroup} from './shelf-layout.js';
 export const collections = [
   {id:'favorites',name:'Favorites'},
   {id:'personal',name:'Personal'},
@@ -5,12 +6,39 @@ export const collections = [
 ];
 export const historicalAttributes=['manufacturer','year','era','type'];
 export const organizationOptions=['all','collections',...historicalAttributes,...collections.map(c=>c.id)];
+const objectStudio={label:'Explore the model in Object Studio',url:'https://jasonsperske.github.io/object_studio/'};
+const chrs={label:'California Historical Radio Society',url:'https://californiahistoricalradio.com/'};
+// footprint is measured in shelf slots (w) and shelf rows (h). poses hold the
+// generator parameters for the switched-off shelf pose and the playing pose;
+// volumeParam names the generator's volume knob, if it has one.
 export const catalog = {
   'rca-ggie-1939': {
     id:'rca-ggie-1939', model:'ggie-radio', name:'Golden Gate International Exposition', shortName:'RCA Victor · GGIE', manufacturer:'RCA Victor', year:1939, era:'Pre-war', type:'Tabletop',
     description:'This RCA Victor tabletop radio commemorates the 1939 Golden Gate International Exposition, held on Treasure Island in San Francisco Bay. Its sculpted front depicts the exposition’s architecture and the Golden Gate Bridge.',
     modelNote:'This Object Studio model is a photo-based interpretation. Details and control calibration are approximate.',
-    resources:[{label:'Explore the model in Object Studio',url:'https://jasonsperske.github.io/object_studio/'},{label:'California Historical Radio Society',url:'https://californiahistoricalradio.com/'}]
+    footprint:{w:1,h:1}, poses:{off:{power:'off'},on:{power:'on',frequency:900}}, volumeParam:'volume',
+    resources:[objectStudio,chrs]
+  },
+  'silvertone-6110-1938': {
+    id:'silvertone-6110-1938', model:'silvertone-rocket-radio', name:'Silvertone 6110 “Rocket”', shortName:'Silvertone · Rocket', manufacturer:'Silvertone (Sears)', year:1938, era:'Pre-war', type:'Tabletop',
+    description:'Sears sold this Bakelite radio under its Silvertone name. The cylindrical body sits on a slatted grille base. To tune it, you turn the whole domed nose until the station sits over a fixed pointer. Six pushbuttons on top select preset stations.',
+    modelNote:'This Object Studio model is a photo-based interpretation. Slat count, dome depth and small fittings are estimated from photographs. The pushbutton stations are placeholders, because owners set their own.',
+    footprint:{w:1,h:1}, poses:{off:{frequency:750},on:{frequency:750}}, volumeParam:null,
+    resources:[objectStudio,chrs]
+  },
+  'fritchle-1931': {
+    id:'fritchle-1931', model:'fritchle-radio', name:'Fritchle cabinet radio', shortName:'Fritchle · Cabinet', manufacturer:'Fritchle', year:1931, era:'Pre-war', type:'Console',
+    description:'Oliver P. Fritchle built this tuned radio frequency (TRF) set in the cabinet he patented in 1928. A bell-waisted walnut speaker case with a pierced fan grille stands above a control compartment with a brass drum dial and three knobs, all on carved cabriole legs.',
+    modelNote:'This Object Studio model is a photo-based interpretation. The fretwork is simplified, and which knob does what is inferred from typical TRF sets of the period.',
+    footprint:{w:2,h:3}, poses:{off:{power:'off',dial:40},on:{power:'on',dial:62}}, volumeParam:'volume', floorStanding:true,
+    resources:[objectStudio,chrs]
+  },
+  'navy-field-radio-1943': {
+    id:'navy-field-radio-1943', model:'field-radio', name:'Navy field transmitter-receiver', shortName:'Navy · CRI-43044', manufacturer:'Westinghouse', year:'1940s', era:'World War II', type:'Field radio',
+    description:'The museum exhibits this olive-drab transmitter-receiver as CRI-43044/TS-141VP, in honor of the Navajo Code Talkers. Between 1942 and 1945 the Marine Corps recruited Navajo speakers to send messages in a code that was never broken. The protection came from the language and the code, not from the radio. The set itself, built for the Navy Department’s Bureau of Ships, encrypts nothing.',
+    modelNote:'This Object Studio model is a photo-based interpretation. The cabinet dimensions are estimated from photographs. Control meanings follow the Navy’s TBY documentation.',
+    footprint:{w:2,h:2}, poses:{off:{power:'off',supplyPower:'off'},on:{power:'on',supplyPower:'on'}}, volumeParam:'volume',
+    resources:[objectStudio,{label:'Navy TBY controls, Introduction to Radio Equipment',url:'https://www.maritime.org/doc/radio/chap22.php'},chrs]
   }
 };
 // getRandomValues works on HTTP LAN previews as well as HTTPS. randomUUID
@@ -75,11 +103,13 @@ export function buildShelfGroups(radios,organization='all',records=catalog) {
   }else if(organization==='collections'||collections.some(c=>c.id===organization)){
     groups=collections.filter(c=>organization==='collections'||c.id===organization).map(c=>({...c,radios:radios.filter(r=>r.memberships?.[c.id]!==undefined).sort((a,b)=>b.memberships[c.id]-a.memberships[c.id]||newest(a,b))}));
   }else groups=[{id:'all',name:'All radios',radios:[...radios].sort(newest)}];
+  const footprint=radio=>records[radio.catalogId]?.footprint;
+  for(const group of groups)Object.assign(group,packGroup(group.radios,footprint));
   let rowY=0;
   for(let i=0;i<groups.length;i+=3){
     const row=groups.slice(i,i+3);
     row.forEach((group,column)=>{group.x=column;group.y=-rowY});
-    rowY+=Math.max(1,...row.map(g=>Math.ceil(g.radios.length/3)));
+    rowY+=Math.max(...row.map(g=>g.rows));
   }
   return groups;
 }

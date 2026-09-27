@@ -2,7 +2,8 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createStudioRuntime} from '../public/vendor/studio-runtime.js';
-import {placeTableUnderRadio} from '../src/scene.js';
+import {placeTableUnderRadio,fitTableToRadio,centerFootprint,radioParams,TABLE_BASE} from '../src/scene.js';
+import {catalog} from '../src/catalog.js';
 const {THREE,compileObject}=createStudioRuntime();
 function model(id,overrides={}) {
  const definition=compileObject(id,readFileSync(new URL(`../public/vendor/${id}.js`,import.meta.url),'utf8'));
@@ -28,4 +29,20 @@ test('radio feet remain on the tabletop when rotated or powered on',()=>{
   radio.traverse(mesh=>{if(mesh.isMesh){mesh.geometry.dispose();mesh.material.dispose()}});
  }
  table.traverse(mesh=>{if(mesh.isMesh){mesh.geometry.dispose();mesh.material.dispose()}});
+});
+test('every tabletop radio fits on its listening-corner table',()=>{
+ for(const [catalogId,record] of Object.entries(catalog)){
+  if(record.floorStanding)continue;
+  for(const on of [false,true]){
+   const table=model('shelf-unit',TABLE_BASE);
+   const radio=centerFootprint(model(record.model,radioParams(catalogId,{on,volume:.5})));radio.rotation.set(0,-.35,0);
+   fitTableToRadio(radio,table);
+   const tabletop=new THREE.Box3().setFromObject(table);
+   for(const yaw of [-.35,0,Math.PI/4,Math.PI/2,2.6,Math.PI]){
+    radio.rotation.y=yaw;const bounds=new THREE.Box3().setFromObject(radio);
+    assert.ok(Math.abs(bounds.min.y-tabletop.max.y)<.001,`${catalogId} stands on the table`);
+    assert.ok(bounds.min.x>=tabletop.min.x&&bounds.max.x<=tabletop.max.x&&bounds.min.z>=tabletop.min.z&&bounds.max.z<=tabletop.max.z,`${catalogId} fits the tabletop at any turn`);
+   }
+  }
+ }
 });

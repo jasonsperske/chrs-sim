@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "radioId": "fritchle-1931",
+  "period": {
+    "startYear": 1931,
+    "endYear": 1932
+  },
+  "description": "Broadcasts and campaign addresses from the first two years of this radio’s use.",
+  "selection": {
+    "monthDistanceWeights": [
+      6,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "recordings": [
+    {
+      "id": "cbs-1931-03-25",
+      "title": "Norma Shearer interviewed by Louella Parsons",
+      "date": "1931-03-25",
+      "speaker": "Louella Parsons and Norma Shearer",
+      "audioUrl": "https://archive.org/download/norma-shearer-louella-parsons-flexo-interview-remastered/Norma%20Shearer%20Louella%20Parsons%20Flexo%20Interview%20REMASTERED.mp3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/norma-shearer-louella-parsons-flexo-interview-remastered",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1932-04-07",
+      "title": "The “forgotten man” radio address",
+      "date": "1932-04-07",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr004.mp3/aa876539-0aa5-4039-9dd1-8dd52f7ccab6",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr004",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1932-07-02",
+      "title": "Acceptance of the Democratic presidential nomination",
+      "date": "1932-07-02",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr005.mp3/c73e0261-b0fc-41b7-a278-35f6031752ce",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr005",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1932-07-30",
+      "title": "Radio address on the Democratic platform",
+      "date": "1932-07-30",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr006.mp3/2a470a45-9806-4a02-bf27-c56e64805f0e",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr006",
+      "baseWeight": 1
+    },
+    {
+      "id": "hoover-1932-08-11",
+      "title": "Herbert Hoover campaigns for the presidency",
+      "date": "1932-08-11",
+      "speaker": "Herbert Hoover",
+      "audioUrl": "https://archive.org/download/herbhoov1932/herbhoov1932.mp3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/herbhoov1932",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1932-10-02",
+      "title": "The philosophy of social justice through social action",
+      "date": "1932-10-02",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr007.mp3/04881f82-e016-499b-b24b-7361af4cd12b",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr007",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1932-11-05",
+      "title": "Campaign address from Madison Square Garden",
+      "date": "1932-11-05",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr008.mp3/a52a87d0-dcef-4828-9c16-0d6b2b773d9a",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr008",
+      "baseWeight": 1
+    },
+    {
+      "id": "hoover-1932-11-07",
+      "title": "Election eve radio address from Elko, Nevada",
+      "date": "1932-11-07",
+      "speaker": "Herbert Hoover",
+      "audioUrl": "https://d.lib.msu.edu/vvl/2155/PROXY_MP3/view",
+      "sourceName": "G. Robert Vincent Voice Library, Michigan State University",
+      "sourceUrl": "https://d.lib.msu.edu/vvl/2155",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1932-11-09",
+      "title": "Remarks acknowledging victory in the presidential election",
+      "date": "1932-11-09",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr009a.mp3/89013cd2-1799-40f9-82ae-5aa1fbbe30eb",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr009",
+      "baseWeight": 1
+    }
+  ]
+}

@@ -4,7 +4,7 @@ export const meta = {
   description: 'The 1939 RCA Victor Golden Gate International Exposition radio: a walnut cabinet, sculpted bridge and Tower of the Sun, woven grille and amber tuning dial. Photo-based interpretation with working control poses.',
 };
 export const params = [
-  { id: 'power', label: 'Power', type: 'select', group: 'Radio controls', default: 'on', options: [{value:'on',label:'On'},{value:'off',label:'Off'}], help: 'Poses the left knob at its off detent and dims the dial when switched off.' },
+  { id: 'power', label: 'Power', type: 'select', group: 'Radio controls', default: 'on', options: [{value:'on',label:'On'},{value:'off',label:'Off'}], help: 'Poses the left knob at its off detent. The set has no dial lamp, so the dial looks the same on or off.' },
   { id: 'frequency', label: 'Station frequency', type: 'number', group: 'Radio controls', min: 550, max: 1700, step: 10, default: 900, unit: 'kHz', help: 'Moves the dial pointer and right tuning knob. Scale follows the photographed markings; intermediate calibration is approximate.' },
   { id: 'volume', label: 'Volume', type: 'number', group: 'Radio controls', min: 0, max: 100, step: 1, default: 45, unit: '%', help: 'Rotates the left knob while powered. Control assignment is inferred; no audio is generated.' },
 ];
@@ -148,7 +148,8 @@ export function build(p) {
   label('TOWER OF THE SUN',-77,19,2.5,3.8,C.shadow);
   label('GOLDEN GATE BRIDGE',15,22,2.5,3.8,C.shadow);
   // Amber dial and art-deco printed lines. Frequency interpolates between observed labels.
-  panel('Amber tuning scale',rect(34,56,50,65,4),-1.3,1,on?0x99542e:0x613e29,0);
+  // There is no dial lamp: the scale is unlit and unchanged by power.
+  panel('Amber tuning scale',rect(34,56,50,65,4),-1.3,1,0x99542e,0);
   const marks=[550,650,700,800,900,1050,1250,1400,1700];
   const angles=marks.map((_,i)=>Math.PI-(i/(marks.length-1))*Math.PI);
   for(let i=0;i<marks.length;i++)label(String(marks[i]/10),59+Math.cos(angles[i])*20,89+Math.sin(angles[i])*24,3.3,-.1,C.ivory);
