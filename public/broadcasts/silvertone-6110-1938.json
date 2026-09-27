@@ -19,6 +19,66 @@
   },
   "recordings": [
     {
+      "id": "shadow-1939-01-01",
+      "title": "The Shadow: The Man Who Murdered Time",
+      "date": "1939-01-01",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-01-01%20-%20The%20Man%20Who%20Murdered%20Time.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-01-08",
+      "title": "The Shadow: Island Of The Devil",
+      "date": "1939-01-08",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-01-08%20-%20Island%20Of%20The%20Devil.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-01-15",
+      "title": "The Shadow: Ghosts Can Kill",
+      "date": "1939-01-15",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-01-15%20-%20Ghosts%20Can%20Kill.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-01-16",
+      "title": "The Shadow: Sabotage",
+      "date": "1938-01-16",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-01-16%20-%20Sabotage.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-01-22",
+      "title": "The Shadow: Valley of the Living Dead",
+      "date": "1939-01-22",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-01-22%20-%20Valley%20of%20the%20Living%20Dead.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-01-23",
+      "title": "The Shadow: The Society of the Living Dead",
+      "date": "1938-01-23",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-01-23%20-%20The%20Society%20of%20the%20Living%20Dead.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
       "id": "fdr-1938-01-29",
       "title": "Fifth Birthday Ball address",
       "date": "1938-01-29",
@@ -27,6 +87,46 @@
       "sourceName": "FDR Presidential Library & Museum",
       "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr103",
       "baseWeight": 1
+    },
+    {
+      "id": "shadow-1939-01-29",
+      "title": "The Shadow: Prelude to Terror",
+      "date": "1939-01-29",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-01-29%20-%20Prelude%20to%20Terror.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-01-30",
+      "title": "The Shadow: The Poison Death",
+      "date": "1938-01-30",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-01-30%20-%20The%20Poison%20Death.mp3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-02-05",
+      "title": "The Shadow: The Ghost of Captain Bayloe",
+      "date": "1939-02-05",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-02-05%20-%20The%20Ghost%20of%20Captain%20Bayloe.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-02-06",
+      "title": "The Shadow: The Phantom Voice",
+      "date": "1938-02-06",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-02-06%20-%20The%20Phantom%20Voice.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
     },
     {
       "id": "fdr-1938-02-07",
@@ -39,6 +139,96 @@
       "baseWeight": 1
     },
     {
+      "id": "shadow-1939-02-12",
+      "title": "The Shadow: Hypnotic Death",
+      "date": "1939-02-12",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-02-12%20-%20Hypnotic%20Death.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-02-13",
+      "title": "The Shadow: The House Of Horror",
+      "date": "1938-02-13",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-02-13%20-%20The%20House%20Of%20Horror.mp3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-02-19",
+      "title": "The Shadow: Friend of Darkness",
+      "date": "1939-02-19",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-02-19%20-%20Friend%20of%20Darkness.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-02-20",
+      "title": "The Shadow: Hounds In The Hills",
+      "date": "1938-02-20",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-02-20%20-%20Hounds%20in%20the%20Hills.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-02-26",
+      "title": "The Shadow: Horror in Wax",
+      "date": "1939-02-26",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-02-26%20-%20Horror%20in%20Wax.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-02-27",
+      "title": "The Shadow: The Plot Murder",
+      "date": "1938-02-27",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-02-27%20-%20The%20Plot%20Murder.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-03-05",
+      "title": "The Shadow: Sabotage By Air",
+      "date": "1939-03-05",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-03-05%20-%20Sabotage%20By%20Air.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-03-06",
+      "title": "The Shadow: The Bride of Death",
+      "date": "1938-03-06",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-03-06%20-%20The%20Bride%20of%20Death.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-03-12",
+      "title": "The Shadow: Appointment with Death",
+      "date": "1939-03-12",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-03-12%20-%20Appointment%20With%20Death.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
       "id": "cbs-1938-03-13",
       "title": "CBS World News Roundup",
       "date": "1938-03-13",
@@ -47,6 +237,56 @@
       "sourceName": "Internet Archive",
       "sourceUrl": "https://archive.org/details/WartimeRadio1938",
       "baseWeight": 1
+    },
+    {
+      "id": "shadow-1939-03-19",
+      "title": "The Shadow: Can The Dead Talk",
+      "date": "1939-03-19",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-03-19%20-%20Can%20The%20Dead%20Talk.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-03-20",
+      "title": "The Shadow: The White Legion",
+      "date": "1938-03-20",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-03-20%20-%20The%20White%20Legion.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-03-27",
+      "title": "The Shadow: The Hypnotized Audience",
+      "date": "1938-03-27",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-03-27%20-%20The%20Hypnotized%20Audience.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-04-03",
+      "title": "The Shadow: Death From The Deep",
+      "date": "1938-04-03",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-04-03%20-%20Death%20From%20the%20Deep.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-04-10",
+      "title": "The Shadow: The Firebug",
+      "date": "1938-04-10",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-04-10%20-%20The%20Firebug.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
     },
     {
       "id": "fdr-1938-04-14",
@@ -59,6 +299,66 @@
       "baseWeight": 1
     },
     {
+      "id": "shadow-1938-04-17",
+      "title": "The Shadow: The Blind Beggar Dies",
+      "date": "1938-04-17",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-04-17%20-%20The%20Blind%20Beggar%20Dies.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-04-24",
+      "title": "The Shadow: Power Of The Mind",
+      "date": "1938-04-24",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-04-24%20-%20Power%20of%20the%20Mind.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-05-01",
+      "title": "The Shadow: The White God",
+      "date": "1938-05-01",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-05-01%20-%20The%20White%20God.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-05-08",
+      "title": "The Shadow: Aboard The Steamship Amazon",
+      "date": "1938-05-08",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-05-08%20-%20Aboard%20The%20Steamship%20Amazon.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-05-15",
+      "title": "The Shadow: Murders in Wax",
+      "date": "1938-05-15",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-05-15%20-%20Murders%20in%20Wax.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-05-22",
+      "title": "The Shadow: Message From The Hills",
+      "date": "1938-05-22",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-05-22%20-%20Message%20From%20The%20Hills.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
       "id": "fdr-1938-05-27",
       "title": "Arthurdale High School commencement address",
       "date": "1938-05-27",
@@ -67,6 +367,46 @@
       "sourceName": "FDR Presidential Library & Museum",
       "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr108",
       "baseWeight": 1
+    },
+    {
+      "id": "shadow-1938-05-29",
+      "title": "The Shadow: The Creeper",
+      "date": "1938-05-29",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-05-29%20-%20The%20Creeper.mp3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-06-05",
+      "title": "The Shadow: The Tenor with the Broken Voice",
+      "date": "1938-06-05",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-06-05%20-%20The%20Tenor%20with%20the%20Broken%20Voice.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-06-12",
+      "title": "The Shadow: Murder On Approval",
+      "date": "1938-06-12",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-06-12%20-%20Murder%20On%20Approval.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-06-19",
+      "title": "The Shadow: The Tomb of Terror",
+      "date": "1938-06-19",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-06-19%20-%20The%20Tomb%20of%20Terror.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
     },
     {
       "id": "fdr-1938-06-24",
@@ -99,6 +439,46 @@
       "baseWeight": 1
     },
     {
+      "id": "shadow-1938-08-21",
+      "title": "The Shadow: Caverns of Death",
+      "date": "1938-08-21",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-08-21-%20The%20Caverns%20of%20Death.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-08-28",
+      "title": "The Shadow: Death Under the Chapel",
+      "date": "1938-08-28",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-08-28%20-%20Death%20Under%20The%20Chapel.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-09-24",
+      "title": "The Shadow: Dead Men Talk",
+      "date": "1939-09-24",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-09-24%20-%20Dead%20Men%20Talk.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-09-25",
+      "title": "The Shadow: Traffic in Death",
+      "date": "1938-09-25",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-09-25%20-%20Traffic%20in%20Death.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
       "id": "bbc-1938-09-30",
       "title": "Neville Chamberlain on his return from Munich",
       "date": "1938-09-30",
@@ -107,6 +487,76 @@
       "sourceName": "Internet Archive",
       "sourceUrl": "https://archive.org/details/WartimeRadio1938",
       "baseWeight": 1
+    },
+    {
+      "id": "shadow-1939-10-01",
+      "title": "The Shadow: The Night Marauders",
+      "date": "1939-10-01",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-10-01%20-%20The%20Night%20Marauders.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-10-02",
+      "title": "The Shadow: The Black Abbot",
+      "date": "1938-10-02",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-10-02%20-%20The%20Black%20Abbot.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-10-09",
+      "title": "The Shadow: Death Stalks The Shadow",
+      "date": "1938-10-09",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-10-09%20-%20Death%20Stalks%20The%20Shadow.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-10-16",
+      "title": "The Shadow: Night Without End",
+      "date": "1938-10-16",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-10-16%20-%20Night%20Without%20End.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-10-22",
+      "title": "The Shadow: House of Fun",
+      "date": "1939-10-22",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-10-22%20-%20House%20of%20Fun.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-10-23",
+      "title": "The Shadow: Gun Island",
+      "date": "1938-10-23",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-10-23%20-%20Gun%20Island.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-10-29",
+      "title": "The Shadow: Phantom Fingerprints",
+      "date": "1939-10-29",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-10-29%20-%20Phantom%20Fingerprints.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
     },
     {
       "id": "cbs-1938-10-30",
@@ -119,6 +569,76 @@
       "baseWeight": 1
     },
     {
+      "id": "shadow-1938-10-30",
+      "title": "The Shadow: The Isle Of Fear",
+      "date": "1938-10-30",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-10-30%20-%20The%20Isle%20Of%20Fear.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-11-05",
+      "title": "The Shadow: Mansion Of Madness",
+      "date": "1939-11-05",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-11-05%20-%20Mansion%20of%20Madness.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-11-06",
+      "title": "The Shadow: Shyster Payoff",
+      "date": "1938-11-06",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-11-06%20-%20Shyster%20Payoff.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-11-12",
+      "title": "The Shadow: The Inventor Of Death",
+      "date": "1939-11-12",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-11-12%20-%20The%20Inventor%20of%20Death.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-11-13",
+      "title": "The Shadow: Black Rock",
+      "date": "1938-11-13",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-11-13%20-%20Black%20Rock.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-11-19",
+      "title": "The Shadow: The Shadow Returns",
+      "date": "1939-11-19",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-11-19%20-%20The%20Shadow%20Returns.mp3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-11-20",
+      "title": "The Shadow: Death Is Blind",
+      "date": "1938-11-20",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-11-20%20-%20Death%20Is%20Blind.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
       "id": "fdr-1938-11-24",
       "title": "Thanksgiving Day address from Warm Springs",
       "date": "1938-11-24",
@@ -129,6 +649,66 @@
       "baseWeight": 1
     },
     {
+      "id": "shadow-1939-11-26",
+      "title": "The Shadow: The Sandhog Murders",
+      "date": "1939-11-26",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-11-26%20-%20The%20Sandhog%20Murders.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-12-03",
+      "title": "The Shadow: Death Shows The Way",
+      "date": "1939-12-03",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-12-03%20-%20Death%20Shows%20The%20Way.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-12-04",
+      "title": "The Shadow: Murder in E Flat",
+      "date": "1938-12-04",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-12-04%20-%20Murder%20in%20E%20Flat.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-12-10",
+      "title": "The Shadow: The Flight of the Vulture",
+      "date": "1939-12-10",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-12-10%20-%20The%20Flight%20of%20the%20Vulture.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1939-12-17",
+      "title": "The Shadow: Murder Incorporated",
+      "date": "1939-12-17",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-12-17%20-%20Murder%20Incorporated.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
+      "id": "shadow-1938-12-18",
+      "title": "The Shadow: Guest Of Death",
+      "date": "1938-12-18",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1938-12-18%20-%20Guest%20of%20Death.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
+    },
+    {
       "id": "fdr-1938-12-24",
       "title": "Community Christmas tree lighting address",
       "date": "1938-12-24",
@@ -137,6 +717,16 @@
       "sourceName": "FDR Presidential Library & Museum",
       "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr132",
       "baseWeight": 1
+    },
+    {
+      "id": "shadow-1939-12-31",
+      "title": "The Shadow: The Cat That Killed",
+      "date": "1939-12-31",
+      "speaker": "Mutual Broadcasting System",
+      "audioUrl": "https://archive.org/download/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes/1939-12-31%20-%20The%20Cat%20That%20Killed.MP3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/the-shadow-radio-show-1937-1954-old-time-radio-all-available-episodes",
+      "baseWeight": 0.2
     }
   ]
 }
