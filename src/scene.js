@@ -43,14 +43,50 @@ export function centerFootprint(radio) {
   radio.rotation.copy(rotation);radio.updateMatrixWorld(true);
   return radio;
 }
-// The table is square enough to hold a centred radio at any turn.
-export function fitTableToRadio(radio,table) {
+// Width of the circle a centred radio sweeps as it turns on its stand.
+function footprintReach(radio) {
   const rotation=radio.rotation.clone();radio.rotation.set(0,0,0);radio.updateMatrixWorld(true);
   const size=new THREE.Box3().setFromObject(radio).getSize(new THREE.Vector3());
   radio.rotation.copy(rotation);radio.updateMatrixWorld(true);
-  const reach=2*Math.hypot(size.x/2,size.z/2);
-  table.scale.set(Math.max(.52,(reach+40)/TABLE_BASE.width),.12,Math.max(2,(reach+40)/TABLE_BASE.depth));
+  return 2*Math.hypot(size.x/2,size.z/2);
+}
+// The table is square enough to hold a centred radio at any turn. A plinth
+// for a floor-standing radio is the same board, low and with a wider margin.
+export function fitTableToRadio(radio,table,{height=.12,margin=90}={}) {
+  const reach=footprintReach(radio)+margin;
+  table.scale.set(reach/TABLE_BASE.width,height,reach/TABLE_BASE.depth);
   placeTableUnderRadio(radio,table);
+}
+// Tabletop radios stand on a table; floor-standing ones on a low plinth and
+// take more of a taller stage.
+export function stageForListening(radio,stand,floorStanding) {
+  radio.rotation.set(0,-.35,0);radio.position.set(0,0,0);radio.updateMatrixWorld(true);
+  fitTableToRadio(radio,stand,floorStanding?{height:.04,margin:160}:{});
+  return {fill:floorStanding?.8:.4};
+}
+// Aim the camera so the space the radio sweeps as it turns fills `fill` of
+// the view's height (and at most 90% of its width), then back off until its
+// stand is in view too. Distances follow the radio's own size, so a console
+// radio gets as much of the stage as a tabletop set does.
+export function frameListening(camera,radio,stand,{fill=.4}={}) {
+  const corners=box=>{const points=[];for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z])points.push(new THREE.Vector3(x,y,z));return points};
+  const sweep=new THREE.Box3().setFromObject(radio),reach=footprintReach(radio)/2;
+  sweep.min.x=Math.min(sweep.min.x,-reach);sweep.max.x=Math.max(sweep.max.x,reach);sweep.min.z=Math.min(sweep.min.z,-reach);sweep.max.z=Math.max(sweep.max.z,reach);
+  const radioPoints=corners(sweep),standPoints=stand?corners(new THREE.Box3().setFromObject(stand)):[];
+  const t=Math.tan(camera.fov*Math.PI/360),centerY=(sweep.min.y+sweep.max.y)/2;
+  const place=distance=>{camera.position.set(0,centerY+distance*.14,distance);camera.lookAt(0,centerY,0);camera.zoom=1;camera.updateProjectionMatrix();camera.updateMatrixWorld(true)};
+  const project=points=>points.map(p=>p.clone().project(camera));
+  let distance=Math.max((sweep.max.y-sweep.min.y)/2/t/fill,(sweep.max.x-sweep.min.x)/2/(t*camera.aspect)/.9);
+  // Nearer corners project larger, so refine the distance against the real
+  // projection rather than trusting the flat estimate.
+  for(let i=0;i<4;i++){
+    place(distance);
+    const radioView=project(radioPoints),standView=project(standPoints);
+    const ys=radioView.map(p=>p.y);
+    const all=[...radioView,...standView];
+    distance*=Math.max((Math.max(...ys)-Math.min(...ys))/2/fill,...radioView.map(p=>Math.abs(p.x)/.9),...all.map(p=>Math.abs(p.x)/.98),...all.map(p=>Math.abs(p.y)/.98));
+  }
+  place(distance);
 }
 // Stand a radio in a shelf cell: on the floor board, centred across the cell
 // and set back from the shelf's front edge. Radios that span several slots
@@ -85,7 +121,7 @@ export class RoomScene {
     this.observer=new ResizeObserver(()=>{this.resize();this.render()});this.observer.observe(container);
     this.resize();
   }
-  resize(){const w=this.container.clientWidth,h=this.container.clientHeight;if(!w||!h)return;this.renderer.setSize(w,h);this.camera.aspect=w/h;this.camera.updateProjectionMatrix();if(this.mode==='collection'&&this.shelf)this.updateShelves();else this.render()}
+  resize(){const w=this.container.clientWidth,h=this.container.clientHeight;if(!w||!h)return;this.renderer.setSize(w,h);this.camera.aspect=w/h;this.camera.updateProjectionMatrix();if(this.mode==='collection'&&this.shelf)this.updateShelves();else if(this.mode==='listening'&&this.radio){this.frameStage();this.render()}else this.render()}
   async init(){
     const shelf=(overrides)=>buildModel('shelf-unit',{...TABLE_BASE,depth:SHELF_DEPTH,...overrides});
     const [radio,table,frame,board,divider]=await Promise.all([
@@ -124,9 +160,14 @@ export class RoomScene {
   setMode(mode){this.mode=mode; if(!this.radio)return;
     this.world.clear();this.tiles.clear();
     if(mode==='collection') {this.updateShelves();}
+    else if(mode==='listening') {
+      this.world.add(this.radio);this.radio.visible=true;this.stand=this.shelf.clone();
+      this.stage=stageForListening(this.radio,this.stand,catalog[this.catalogId].floorStanding);
+      this.world.add(this.stand);this.frameStage();
+    }
     else {
       this.world.add(this.radio);this.radio.visible=true;
-      const onTable=mode==='workbench'||mode==='listening';
+      const onTable=mode==='workbench';
       this.radio.rotation.set(onTable?0:.02,-.35,0);this.poseRadio();
       // Frame every radio as the GGIE is framed, scaled up for larger sets.
       const k=this.frameScale;
@@ -139,6 +180,7 @@ export class RoomScene {
     }
     this.render();
   }
+  frameStage(){frameListening(this.camera,this.radio,this.stand,this.stage)}
   // Put the radio's centre where the GGIE's sits relative to the camera's
   // aim point (0,0,-40), scaled with the radio so larger sets stay framed.
   poseRadio(){

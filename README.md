@@ -43,6 +43,10 @@ Object Studio, and IndexedDB. No server, account, or package installation is nee
   region packs its radios densely in newest-first order: small radios fill the
   gaps beside large ones. The shelf boards inside a large radio's cell are left
   out and dividers close its sides.
+- The listening corner frames each radio at its own size. Tabletop radios stand
+  on a table sized to their footprint. Floor-standing radios like the Fritchle
+  stand on a low plinth, on a taller stage, and fill most of it. The camera keeps
+  the radio in view at any turn.
 - Listening corner with power, volume, and Another recording controls. Each radio
   loads its own JSON catalog from `public/broadcasts/<catalog-id>.json`:
   - RCA: twelve FDR Library recordings, 1939–1940, including the opening of the
