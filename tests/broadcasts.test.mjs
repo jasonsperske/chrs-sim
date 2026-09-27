@@ -36,3 +36,11 @@ test('invalid dates, wrong radio, and out-of-period recordings are rejected',()=
   assert.throws(()=>validateBroadcastCatalog(copy,catalog.radioId),/historical period/);
  }
 });
+test('every catalog radio has a valid, period-correct recording catalog',async()=>{
+ const {catalog:radios}=await import('../src/catalog.js');
+ for(const id of Object.keys(radios)){
+  const data=JSON.parse(readFileSync(new URL(`../public/broadcasts/${id}.json`,import.meta.url),'utf8'));
+  assert.equal(validateBroadcastCatalog(data,id),data);
+  assert.ok(data.recordings.length>0,`${id} has recordings`);
+ }
+});

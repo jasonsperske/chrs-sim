@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "radioId": "navy-field-radio-1943",
+  "period": {
+    "startYear": 1942,
+    "endYear": 1945
+  },
+  "description": "Wartime news bulletins, Armed Forces Radio Service relays and presidential addresses a forward station could have picked up during the war.",
+  "selection": {
+    "monthDistanceWeights": [
+      6,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "recordings": [
+    {
+      "id": "fdr-1945-01-20",
+      "title": "Fourth inaugural address",
+      "date": "1945-01-20",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr311.mp3/37c56511-c2f9-4c43-8848-a2a110198790",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr311",
+      "baseWeight": 1
+    },
+    {
+      "id": "iwo-jima-1945-02-19",
+      "title": "Live coverage of U.S. Marines landing on Iwo Jima",
+      "date": "1945-02-19",
+      "speaker": "War correspondents",
+      "audioUrl": "https://archive.org/download/WartimeRadio1945/1945-02-19CanLiveCoverageOfU.s.MarinesLandingOnIwoJima.mp3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/WartimeRadio1945",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1945-03-01",
+      "title": "Report to Congress on the Crimea Conference",
+      "date": "1945-03-01",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr312.mp3/27d67cb2-451a-4e7d-9951-07e92705ddf6",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr312",
+      "baseWeight": 1
+    },
+    {
+      "id": "cbs-1945-04-12",
+      "title": "Bulletin reporting the death of President Roosevelt",
+      "date": "1945-04-12",
+      "speaker": "CBS News",
+      "audioUrl": "https://archive.org/download/WartimeRadio1945/1945-04-12CbsBulletinReportsFdrIsDead.mp3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/WartimeRadio1945",
+      "baseWeight": 1
+    },
+    {
+      "id": "truman-1945-05-08",
+      "title": "Announcement of victory in Europe",
+      "date": "1945-05-08",
+      "speaker": "Harry S. Truman",
+      "audioUrl": "https://d.lib.msu.edu/vvl/3142/PROXY_MP3/view",
+      "sourceName": "G. Robert Vincent Voice Library, Michigan State University",
+      "sourceUrl": "https://d.lib.msu.edu/vvl/3142",
+      "baseWeight": 1
+    },
+    {
+      "id": "afrs-1944-06-06",
+      "title": "Announcement of the invasion of Normandy",
+      "date": "1944-06-06",
+      "speaker": "Armed Forces Radio Service",
+      "audioUrl": "https://d.lib.msu.edu/vvl/3220/PROXY_MP3/view",
+      "sourceName": "G. Robert Vincent Voice Library, Michigan State University",
+      "sourceUrl": "https://d.lib.msu.edu/vvl/3220",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1943-07-28",
+      "title": "Fireside Chat on the progress of the war and plans for peace",
+      "date": "1943-07-28",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr278.mp3/3491890b-3399-4043-9143-c77e2bebe2f9",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr278",
+      "baseWeight": 1
+    },
+    {
+      "id": "cbs-1945-08-14",
+      "title": "Coverage of Japan’s surrender",
+      "date": "1945-08-14",
+      "speaker": "Robert Trout",
+      "audioUrl": "https://d.lib.msu.edu/vvl/2105/PROXY_MP3/view",
+      "sourceName": "G. Robert Vincent Voice Library, Michigan State University",
+      "sourceUrl": "https://d.lib.msu.edu/vvl/2105",
+      "baseWeight": 1
+    },
+    {
+      "id": "afrs-1945-09-01",
+      "title": "Japanese surrender aboard the USS Missouri",
+      "date": "1945-09-01",
+      "speaker": "Douglas MacArthur",
+      "audioUrl": "https://d.lib.msu.edu/vvl/2729/PROXY_MP3/view",
+      "sourceName": "G. Robert Vincent Voice Library, Michigan State University",
+      "sourceUrl": "https://d.lib.msu.edu/vvl/2729",
+      "baseWeight": 1
+    },
+    {
+      "id": "truman-1945-10-27",
+      "title": "Navy Day address",
+      "date": "1945-10-27",
+      "speaker": "Harry S. Truman",
+      "audioUrl": "https://d.lib.msu.edu/vvl/3128/PROXY_MP3/view",
+      "sourceName": "G. Robert Vincent Voice Library, Michigan State University",
+      "sourceUrl": "https://d.lib.msu.edu/vvl/3128",
+      "baseWeight": 1
+    },
+    {
+      "id": "afrs-1942-11-08",
+      "title": "Announcement of American landings in North Africa",
+      "date": "1942-11-08",
+      "speaker": "Armed Forces Radio Service",
+      "audioUrl": "https://d.lib.msu.edu/vvl/3223/PROXY_MP3/view",
+      "sourceName": "G. Robert Vincent Voice Library, Michigan State University",
+      "sourceUrl": "https://d.lib.msu.edu/vvl/3223",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1943-12-24",
+      "title": "Fireside Chat on the Tehran and Cairo conferences",
+      "date": "1943-12-24",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr284.mp3/34dfd4ee-230b-4096-a2a9-4da554ce0d77",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr284",
+      "baseWeight": 1
+    }
+  ]
+}

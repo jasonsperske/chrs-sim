@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "radioId": "silvertone-6110-1938",
+  "period": {
+    "startYear": 1938,
+    "endYear": 1939
+  },
+  "description": "Broadcasts, news and public addresses from the first two years of this radio’s use.",
+  "selection": {
+    "monthDistanceWeights": [
+      6,
+      3,
+      2,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "recordings": [
+    {
+      "id": "fdr-1938-01-29",
+      "title": "Fifth Birthday Ball address",
+      "date": "1938-01-29",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr104.mp3/99c93d97-9232-4eb1-a382-caff8851d310",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr103",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1938-02-07",
+      "title": "Radio greetings to the Boy Scouts",
+      "date": "1938-02-07",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr105.mp3/4505c137-c778-48c1-923f-8ece50537092",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr104",
+      "baseWeight": 1
+    },
+    {
+      "id": "cbs-1938-03-13",
+      "title": "CBS World News Roundup",
+      "date": "1938-03-13",
+      "speaker": "CBS news correspondents",
+      "audioUrl": "https://archive.org/download/WartimeRadio1938/13-03-1938WorldNewsRoundup.mp3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/WartimeRadio1938",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1938-04-14",
+      "title": "Fireside Chat on present economic conditions",
+      "date": "1938-04-14",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr107.mp3/8e0f2105-18e4-423a-9c8d-53608bcaf52b",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr106",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1938-05-27",
+      "title": "Arthurdale High School commencement address",
+      "date": "1938-05-27",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr109.mp3/1a8c62f0-b592-49f6-9a6c-c3575fbc58b0",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr108",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1938-06-24",
+      "title": "Fireside Chat on party primaries",
+      "date": "1938-06-24",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr111.mp3/7e2cd2fb-e90d-4935-a2b4-67f67ad1cf83",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr110",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1938-07-03",
+      "title": "Dedication of the Gettysburg Battlefield memorial",
+      "date": "1938-07-03",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr116.mp3/c78545b2-51ca-48a7-a0bf-a9ef3e1d568c",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr115",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1938-08-15",
+      "title": "Third anniversary of the Social Security Act",
+      "date": "1938-08-15",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr121.mp3/f52072f3-4d06-498c-a780-5c89e98430b3",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr120",
+      "baseWeight": 1
+    },
+    {
+      "id": "bbc-1938-09-30",
+      "title": "Neville Chamberlain on his return from Munich",
+      "date": "1938-09-30",
+      "speaker": "Neville Chamberlain",
+      "audioUrl": "https://archive.org/download/WartimeRadio1938/30-09-1938ChamberlainOnHisReturnFromMunich.mp3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/WartimeRadio1938",
+      "baseWeight": 1
+    },
+    {
+      "id": "cbs-1938-10-30",
+      "title": "The War of the Worlds, Mercury Theatre on the Air",
+      "date": "1938-10-30",
+      "speaker": "Orson Welles",
+      "audioUrl": "https://archive.org/download/OrsonWellesWarOfTheWorlds10301938/Orson%20Welles%20-%20War%20Of%20The%20Worlds%20-%2010-30-1938.mp3",
+      "sourceName": "Internet Archive",
+      "sourceUrl": "https://archive.org/details/OrsonWellesWarOfTheWorlds10301938",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1938-11-24",
+      "title": "Thanksgiving Day address from Warm Springs",
+      "date": "1938-11-24",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr130.mp3/2d699dc0-b1e8-4589-a0ee-b5a6ee77b7c0",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr129",
+      "baseWeight": 1
+    },
+    {
+      "id": "fdr-1938-12-24",
+      "title": "Community Christmas tree lighting address",
+      "date": "1938-12-24",
+      "speaker": "Franklin D. Roosevelt",
+      "audioUrl": "https://www.fdrlibrary.org/documents/356632/405112/afdr133.mp3/4fc4fc06-08c3-4781-8829-1831578b9c8b",
+      "sourceName": "FDR Presidential Library & Museum",
+      "sourceUrl": "https://www.fdrlibrary.org/utterancesfdr#afdr132",
+      "baseWeight": 1
+    }
+  ]
+}

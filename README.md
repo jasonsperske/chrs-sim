@@ -35,10 +35,22 @@ Object Studio, and IndexedDB. No server, account, or package installation is nee
   acknowledges it, which is saved locally.
 - Dedicated hash-routed history pages and personal collection controls. The workbench is disabled
   for now; existing cabinet-care data is preserved.
+- Four radios from Object Studio: the 1939 RCA Victor GGIE, the 1938 Silvertone
+  6110 “Rocket”, Oliver P. Fritchle's c.1931 cabinet radio, and the 1940s Navy field
+  transmitter-receiver shown in the Navajo Code Talkers exhibit.
+- Shelves are a bento layout. Each catalog radio declares a `footprint` in shelf
+  slots and rows, e.g. the Fritchle is 2×3 and the field radio 2×2. Each shelf
+  region packs its radios densely in newest-first order: small radios fill the
+  gaps beside large ones. The shelf boards inside a large radio's cell are left
+  out and dividers close its sides.
 - Listening corner with power, volume, and Another recording controls. Each radio
-  loads its own JSON catalog from `public/broadcasts/<catalog-id>.json`. The RCA
-  starts with twelve verified FDR Library recordings dated 1939–1940, including
-  the opening of the Golden Gate International Exposition.
+  loads its own JSON catalog from `public/broadcasts/<catalog-id>.json`:
+  - RCA: twelve FDR Library recordings, 1939–1940, including the opening of the
+    Golden Gate International Exposition.
+  - Silvertone: twelve 1938 broadcasts, including The War of the Worlds.
+  - Fritchle: nine from 1931–1932, mostly the 1932 campaign.
+  - Field radio: twelve wartime bulletins, Armed Forces Radio Service relays and
+    addresses a station could have received, 1942–1945.
 - Random selection weights are 6 for the current month, 3 for adjacent months,
   2 for months two away, and 1 otherwise. Month distance wraps across December
   and January, uses the visitor's local month, and multiplies each track's baseWeight.
@@ -53,11 +65,11 @@ Object Studio, and IndexedDB. No server, account, or package installation is nee
 
 ## Study mode and future acquisitions
 
-New collections start without radios. Use **Add a radio** on the collection screen,
-then **Add to your collection** on the radio page to add the RCA and select it for
-the listening corner. New acquisitions have no personal memberships until you
+New collections start without radios. Use **Add a radio** on the collection screen
+to choose a model, then **Add to your collection** on the radio page to add it and
+select it for the listening corner. `#radio/<catalog-id>` previews any catalog radio. New acquisitions have no personal memberships until you
 choose them on the radio detail page. QR scanning is intentionally absent.
-Open `/?demo=1#collection` to reveal **Add study radio**. This mode uses a separate
+Open `/?demo=1#collection` to reveal **Add study radio**, which adds the chosen model directly. This mode uses a separate
 IndexedDB database so test acquisitions do not change the visitor's collection.
 
 The future acquisition boundary is:
@@ -73,8 +85,9 @@ Only registered entries in `src/catalog.js` are accepted. An optional `id` is re
 for the future exhibit acquisition system. No input is evaluated as executable source:
 only the locally bundled, trusted Object Studio model generators are compiled.
 
-The learning library and workbench are future features. Only one radio model is
-supplied in this version. Add another radio's catalog JSON using the existing schema;
+The learning library and workbench are future features. To add a radio, vendor its
+Object Studio generator into `public/vendor/`, register it in `src/catalog.js` with
+its footprint and poses, and add its catalog JSON using the existing schema;
 recording dates must fall within its declared period and sources must use HTTPS.
 The catalog is validated before playback, and unknown or invalid files show a retry state.
 
@@ -106,11 +119,17 @@ internet connection; preferences and models do not need a backend.
 
 ## Source attribution
 
-- [Object Studio](https://jasonsperske.github.io/object_studio/) — shelf and GGIE
-  radio generators, CC0-1.0, plus bundled Three.js runtime (MIT).
+- [Object Studio](https://jasonsperske.github.io/object_studio/) — shelf, GGIE,
+  Silvertone rocket, Fritchle and field radio generators, CC0-1.0, plus bundled
+  Three.js runtime (MIT).
   See `public/vendor/NOTICE.md` and retained runtime license comments.
 - [FDR Presidential Library, audio recordings](https://www.fdrlibrary.org/utterancesfdr#afdr148)
-  — dated recordings from 1939–1940. Audio remains hosted by the archive.
+  — dated recordings from 1932–1945.
+- [Vincent Voice Library, Michigan State University](https://d.lib.msu.edu/vvl)
+  — wartime and 1932 campaign recordings.
+- [Internet Archive](https://archive.org/) — news broadcasts, The War of the Worlds
+  and other period recordings. Each recording links to its source item.
+- Audio remains hosted by each archive.
 
 Optional WebMCP tools expose collection read-back and room navigation in supporting
 browsers. They use the same actions and state as the interface.

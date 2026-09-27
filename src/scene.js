@@ -1,4 +1,6 @@
 import { createStudioRuntime } from '../public/vendor/studio-runtime.js';
+import { catalog } from './catalog.js';
+import { TILE_W,TILE_H,SLOTS,SHELF_DEPTH,SIDE,HALF_BOARD,DIVIDER,INNER,SEGMENT } from './shelf-layout.js';
 const {THREE, compileObject} = createStudioRuntime();
 const definitions = new Map();
 async function definition(id) {
@@ -29,9 +31,46 @@ export function placeTableUnderRadio(radio, table) {
   table.position.y+=radioBounds.min.y-tableBounds.max.y;
   table.updateMatrixWorld(true);
 }
+// Scale the display table so it is wider and deeper than the radio standing
+// on it, then move it under the radio. The table model is TABLE_BASE in size.
+export const TABLE_BASE={width:1000,height:530,depth:270,shelves:0,toeKick:0,sideThickness:20,shelfThickness:24,edgeStyle:'rounded'};
+// Generators put their origin at different points of the footprint; move the
+// parts so the origin is the footprint's centre and the radio turns in place.
+export function centerFootprint(radio) {
+  const rotation=radio.rotation.clone();radio.rotation.set(0,0,0);radio.updateMatrixWorld(true);
+  const center=new THREE.Box3().setFromObject(radio).getCenter(new THREE.Vector3()).sub(radio.position);
+  for(const child of radio.children){child.position.x-=center.x;child.position.z-=center.z}
+  radio.rotation.copy(rotation);radio.updateMatrixWorld(true);
+  return radio;
+}
+// The table is square enough to hold a centred radio at any turn.
+export function fitTableToRadio(radio,table) {
+  const rotation=radio.rotation.clone();radio.rotation.set(0,0,0);radio.updateMatrixWorld(true);
+  const size=new THREE.Box3().setFromObject(radio).getSize(new THREE.Vector3());
+  radio.rotation.copy(rotation);radio.updateMatrixWorld(true);
+  const reach=2*Math.hypot(size.x/2,size.z/2);
+  table.scale.set(Math.max(.52,(reach+40)/TABLE_BASE.width),.12,Math.max(2,(reach+40)/TABLE_BASE.depth));
+  placeTableUnderRadio(radio,table);
+}
+// Stand a radio in a shelf cell: on the floor board, centred across the cell
+// and set back from the shelf's front edge. Radios that span several slots
+// face straight out; single-slot radios keep a slight turn.
+export function placeRadioInCell(radio,cell) {
+  radio.rotation.set(0,cell.w>1?0:-.12,0);radio.position.set(0,0,0);radio.updateMatrixWorld(true);
+  const bounds=new THREE.Box3().setFromObject(radio);
+  radio.position.set(cell.x-(bounds.min.x+bounds.max.x)/2,cell.floorY-bounds.min.y,SHELF_DEPTH-20-bounds.max.z);
+  radio.updateMatrixWorld(true);
+}
+// Model settings for a catalog radio: its shelf pose, or its playing pose.
+export function radioParams(catalogId,{on=false,volume}={}) {
+  const record=catalog[catalogId];
+  const params={...record.poses[on?'on':'off']};
+  if(record.volumeParam&&volume!==undefined)params[record.volumeParam]=Math.round(volume*100);
+  return params;
+}
 export class RoomScene {
   constructor(container, onError) {
-    this.container=container;this.onError=onError;this.mode='welcome';this.pan={x:0,y:0};this.zoom=1;this.tiles=new Map();this.labels=[];this.radios=[];this.disposed=false;
+    this.container=container;this.onError=onError;this.mode='welcome';this.catalogId='rca-ggie-1939';this.layout={cells:[],openings:new Set(),dividers:[]};this.pan={x:0,y:0};this.zoom=1;this.tiles=new Map();this.labels=[];this.radios=[];this.disposed=false;
     this.scene=new THREE.Scene();
     this.camera=new THREE.PerspectiveCamera(35,1,1,20000);
     this.renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:'low-power'});
@@ -48,15 +87,39 @@ export class RoomScene {
   }
   resize(){const w=this.container.clientWidth,h=this.container.clientHeight;if(!w||!h)return;this.renderer.setSize(w,h);this.camera.aspect=w/h;this.camera.updateProjectionMatrix();if(this.mode==='collection'&&this.shelf)this.updateShelves();else this.render()}
   async init(){
-    const [radio,shelf]=await Promise.all([buildModel('ggie-radio',{power:'off'}),buildModel('shelf-unit',{width:1000,height:530,depth:270,shelves:0,toeKick:0,sideThickness:20,shelfThickness:24,edgeStyle:'rounded'})]);
-    if(this.disposed){this.disposeModel(radio);this.disposeModel(shelf);return}
-    this.radio=radio;this.shelf=shelf;
+    const shelf=(overrides)=>buildModel('shelf-unit',{...TABLE_BASE,depth:SHELF_DEPTH,...overrides});
+    const [radio,table,frame,board,divider]=await Promise.all([
+      buildModel(catalog[this.catalogId].model,radioParams(this.catalogId)),
+      buildModel('shelf-unit',TABLE_BASE),
+      // Sides and back of one tile; its shelf boards are added per slot.
+      shelf({}),
+      // Two stacked boards one slot wide: the top of one tile and the bottom of the next.
+      shelf({width:SEGMENT+2*SIDE,height:2*HALF_BOARD,back:false}),
+      shelf({width:DIVIDER,height:TILE_H,sideThickness:DIVIDER/2,back:false}),
+    ]);
+    const parts=[radio,table,frame,board,divider];
+    if(this.disposed){parts.forEach(p=>this.disposeModel(p));return}
+    this.radio=centerFootprint(radio);this.shelf=table;
     const textureCanvas=document.createElement('canvas');textureCanvas.width=256;textureCanvas.height=512;
     const ctx=textureCanvas.getContext('2d');ctx.fillStyle='#ba9b74';ctx.fillRect(0,0,256,512);
     for(let i=0;i<650;i++){const x=(i*37.717)%256;ctx.strokeStyle=`rgba(57,30,12,${.035+(i%7)*.013})`;ctx.lineWidth=i%3===0?1:.45;ctx.beginPath();ctx.moveTo(x,0);for(let y=0;y<=512;y+=12)ctx.lineTo(x+Math.sin(y*.012+i)*1.8,y);ctx.stroke()}
     const grain=new THREE.CanvasTexture(textureCanvas);grain.colorSpace=THREE.SRGBColorSpace;grain.wrapS=grain.wrapT=THREE.RepeatWrapping;this.grain=grain;
-    for(const child of shelf.children){child.material.color.set(child.name==='back-panel'?0x5f4735:0x95724e);child.material.map=grain;child.material.roughness=.86;}
+    for(const model of [table,frame,board,divider])for(const child of model.children){child.material.color.set(child.name==='back-panel'?0x5f4735:0x95724e);child.material.map=grain;child.material.roughness=.86;}
+    this.frame=new THREE.Group();this.frame.add(...frame.children.filter(c=>c.name!=='shelves'));
+    this.board=board.children.find(c=>c.name==='shelves');this.board.position.y=-HALF_BOARD;
+    this.divider=divider.children.find(c=>c.name==='sides');
+    this.shelfParts=[this.frame,frame,board,divider];
     this.world.add(radio);this.setMode(this.mode);
+  }
+  // One shelf tile: the frame plus the board segments along its lower edge
+  // that are not inside a merged cell.
+  createTile(x,y){
+    const tile=this.frame.clone();
+    for(let slot=0;slot<SLOTS;slot++){
+      if(this.layout.openings.has(`${x*SLOTS+slot},${y}`))continue;
+      const board=this.board.clone();board.position.x=-INNER+SEGMENT*(slot+.5);tile.add(board);
+    }
+    tile.position.set(x*TILE_W,y*TILE_H,0);return tile;
   }
   setMode(mode){this.mode=mode; if(!this.radio)return;
     this.world.clear();this.tiles.clear();
@@ -64,23 +127,35 @@ export class RoomScene {
     else {
       this.world.add(this.radio);this.radio.visible=true;
       const onTable=mode==='workbench'||mode==='listening';
-      this.radio.position.set(0,-90,0);this.radio.rotation.set(onTable?0:.02,-.35,0);
-      const mobile=this.camera.aspect<.9;
-      this.camera.position.set(0,80,mobile?570:(mode==='workbench'||mode==='listening'?570:410));this.camera.lookAt(0,0,-40);
+      this.radio.rotation.set(onTable?0:.02,-.35,0);this.poseRadio();
+      // Frame every radio as the GGIE is framed, scaled up for larger sets.
+      const k=this.frameScale;
+      const mobile=this.camera.aspect<.9,distance=mobile||onTable?570:410;
+      this.camera.position.set(0,80*k,(distance+40)*k-40);this.camera.lookAt(0,0,-40);
       this.camera.zoom=1;this.camera.updateProjectionMatrix();
-      if(mode==='workbench'||mode==='listening') {
-        const table=this.shelf.clone();table.scale.set(.52,.12,2);
-        placeTableUnderRadio(this.radio,table);this.world.add(table);
+      if(onTable&&!catalog[this.catalogId].floorStanding) {
+        const table=this.shelf.clone();fitTableToRadio(this.radio,table);this.world.add(table);
       }
     }
     this.render();
   }
-  updateShelves(){if(!this.shelf)return;
-    const cx=Math.round(this.pan.x/1000),cy=Math.round(this.pan.y/530);
+  // Put the radio's centre where the GGIE's sits relative to the camera's
+  // aim point (0,0,-40), scaled with the radio so larger sets stay framed.
+  poseRadio(){
+    const radio=this.radio;radio.position.set(0,0,0);radio.updateMatrixWorld(true);
+    const bounds=new THREE.Box3().setFromObject(radio),center=bounds.getCenter(new THREE.Vector3());
+    const size=bounds.getSize(new THREE.Vector3());
+    // 238 × 178 × 163 mm is the GGIE; deep radios come nearer the camera too.
+    const k=this.frameScale=Math.max(1,size.x/238,size.y/178,size.z/220);
+    radio.position.set(-center.x,-center.y-2*k,-center.z-40-30*k);
+    radio.updateMatrixWorld(true);
+  }
+  updateShelves(){if(!this.frame)return;
+    const cx=Math.round(this.pan.x/TILE_W),cy=Math.round(this.pan.y/TILE_H);
     const rx=Math.ceil((this.container.clientWidth/this.container.clientHeight)*1.7/this.zoom)+1,ry=Math.ceil(1.8/this.zoom)+1;
     const keep=new Set();
     for(let x=cx-rx;x<=cx+rx;x++)for(let y=cy-ry;y<=cy+ry;y++){
-      const key=`${x},${y}`;keep.add(key);if(!this.tiles.has(key)){const tile=this.shelf.clone();tile.position.set(x*1000,y*530,0);this.world.add(tile);this.tiles.set(key,tile)}
+      const key=`${x},${y}`;keep.add(key);if(!this.tiles.has(key)){const tile=this.createTile(x,y);this.world.add(tile);this.tiles.set(key,tile)}
     }
     for(const [key,tile]of this.tiles)if(!keep.has(key)){this.world.remove(tile);this.tiles.delete(key)}
     const distance=Math.max(2100,620/(Math.tan(35*Math.PI/360)*this.camera.aspect))/this.zoom;
@@ -88,24 +163,35 @@ export class RoomScene {
     this.render();
   }
   setPan(x,y,zoom=this.zoom){this.pan={x,y};this.zoom=Math.max(.55,Math.min(1.8,zoom));if(this.mode==='collection')this.updateShelves()}
-  project(x,y,z=290){const v=new THREE.Vector3(x,y,z).project(this.camera);return {x:(v.x+1)/2*this.container.clientWidth,y:(1-v.y)/2*this.container.clientHeight}}
-  async setRadios(items){
+  project(x,y,z=SHELF_DEPTH+20){const v=new THREE.Vector3(x,y,z).project(this.camera);return {x:(v.x+1)/2*this.container.clientWidth,y:(1-v.y)/2*this.container.clientHeight}}
+  // Place the collection's radios and reshape the shelves around large ones.
+  async setLayout(layout){
     for(const r of this.radios){this.world.remove(r);this.disposeModel(r)}this.radios=[];
-    if(this.mode!=='collection')return;
+    for(const d of this.dividers||[])this.world.remove(d);this.dividers=[];
+    const openings=[...layout.openings].sort().join(';');
+    this.layout=layout;
+    // Before init finishes, keep the layout; init's setMode builds from it.
+    if(this.mode!=='collection'||!this.frame)return;
+    if(openings!==this.openingsKey){this.openingsKey=openings;for(const tile of this.tiles.values())this.world.remove(tile);this.tiles.clear();this.updateShelves()}
+    for(const {x,floorY,height} of layout.dividers){
+      const divider=this.divider.clone();divider.position.set(x,floorY,0);divider.scale.y=height/TILE_H;
+      this.world.add(divider);this.dividers.push(divider);
+    }
     const generation=this.generation=(this.generation||0)+1;
-    for(const item of items){
-      const radio=await buildModel('ggie-radio',{power:'off'});
+    for(const cell of layout.cells){
+      const item=cell.radio;
+      const radio=await buildModel(catalog[item.catalogId].model,radioParams(item.catalogId));
       if(this.disposed||generation!==this.generation||this.mode!=='collection'){this.disposeModel(radio);continue}
-      radio.position.set(item.x,item.y+26,240);radio.rotation.y=-.12;radio.userData.id=item.id;
+      placeRadioInCell(radio,cell);radio.userData.id=item.id;
       if(item.isNew||item.memberships?.highlighted!==undefined){const light=new THREE.PointLight(0xffd79b,180000,650,2);light.position.set(0,300,140);radio.add(light)}
       this.world.add(radio);this.radios.push(radio);
     }this.render();
   }
-  async setRadioControls(overrides){const radio=await buildModel('ggie-radio',overrides);if(this.disposed){this.disposeModel(radio);return}radio.position.copy(this.radio.position);radio.rotation.copy(this.radio.rotation);this.world.remove(this.radio);this.disposeModel(this.radio);this.radio=radio;this.world.add(radio);this.render()}
+  async setRadioControls(overrides){const radio=centerFootprint(await buildModel(catalog[this.catalogId].model,overrides));if(this.disposed){this.disposeModel(radio);return}radio.position.copy(this.radio.position);radio.rotation.copy(this.radio.rotation);this.world.remove(this.radio);this.disposeModel(this.radio);this.radio=radio;this.world.add(radio);this.render()}
   polishCabinet(polished){this.radio?.traverse(mesh=>{if(mesh.isMesh&&/walnut|veneer|cabinet|fascia/i.test(mesh.name))mesh.material.roughness=polished?.32:.7});this.render()}
   openCabinet(open){if(!this.radio)return;for(const mesh of this.radio.children){if(/back|rear/i.test(mesh.name))mesh.position.z=open?-85:0}this.radio.rotation.y=open?2.6:-.35;this.render()}
   rotate(amount){if(this.mode!=='collection'&&this.radio){this.radio.rotation.y+=amount;this.render()}}
   render(){if(!this.disposed)this.renderer.render(this.scene,this.camera);this.onRender?.()}
   disposeModel(group){group.traverse(child=>{if(child.isMesh){child.geometry.dispose();child.material.dispose()}})}
-  dispose(){this.disposed=true;this.generation=(this.generation||0)+1;this.grain?.dispose();this.observer.disconnect();if(this.radio)this.disposeModel(this.radio);if(this.shelf)this.disposeModel(this.shelf);for(const r of this.radios)this.disposeModel(r);this.renderer.dispose()}
+  dispose(){this.disposed=true;this.generation=(this.generation||0)+1;this.grain?.dispose();this.observer.disconnect();if(this.radio)this.disposeModel(this.radio);if(this.shelf)this.disposeModel(this.shelf);for(const part of this.shelfParts||[])this.disposeModel(part);for(const r of this.radios)this.disposeModel(r);this.renderer.dispose()}
 }
